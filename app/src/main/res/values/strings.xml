@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestTwitter</string>
+    <string name="twitter_consumer_key">0IaXRpWFCO96JlTFYGLgV5Oke</string>
+    <string name="twitter_consumer_secret">4DlTN2PXe4CQij0btc7fBfdJ5HywhZ5qdj3FAzSkpscnTqZg5T</string>
+    <string name="twitter_oauth">認証開始</string>
+    <string name="twitter_callback_url">gabu://twitter</string>
+</resources>
