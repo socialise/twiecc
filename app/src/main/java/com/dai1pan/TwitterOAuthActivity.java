@@ -1,17 +1,17 @@
-package com.testtwitter;
+package com.dai1pan;
 
 
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.auth.AccessToken;
-import twitter4j.auth.RequestToken;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
 
 /**
  * Created by 2140261 on 2016/11/02.
@@ -106,7 +106,7 @@ public class TwitterOAuthActivity extends android.app.Activity {
 
     private void successOAuth(AccessToken accessToken) {
         TwitterUtils.storeAccessToken(this, accessToken);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainFragmentActivity.class);
         startActivity(intent);
         finish();
     }
