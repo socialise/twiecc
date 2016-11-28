@@ -25,13 +25,15 @@ public class MainFragmentActivity extends AppCompatActivity {
             finish();
 
         }else{
+
 	        //認証が成功したとき
 		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		    fab.setOnClickListener(new View.OnClickListener() {
 			    @Override
 			    public void onClick(View view) {
-				    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						    .setAction("Action", null).show();
+
+					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
+					startActivity(intent);
 			    }
 		    });
             FragmentManager fragmentManager = getFragmentManager();
@@ -40,6 +42,9 @@ public class MainFragmentActivity extends AppCompatActivity {
 		    Fragment fragment = new BlankFragment();
 		    fragmentTransaction.add(R.id.fragment, fragment);
 		    fragmentTransaction.commit();
+
+
+
         }
 
     }
