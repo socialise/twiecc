@@ -31,8 +31,8 @@ import twitter4j.TwitterException;
 
 public class MainListFragment extends ListFragment{
 
-    private TweetAdapter mAdapter;
-    private Twitter mTwitter;
+    protected TweetAdapter mAdapter;
+    protected Twitter mTwitter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainListFragment extends ListFragment{
         }
     }
 
-    private void reloadTimeLine() {
+    protected void reloadTimeLine() {
         AsyncTask<Void, Void, List<Status>> task = new AsyncTask<Void, Void, List<twitter4j.Status>>() {
             @Override
             protected List<twitter4j.Status> doInBackground(Void... params) {
@@ -77,7 +77,7 @@ public class MainListFragment extends ListFragment{
     }
 
     //Stringデータを管理するアダプター
-    private class TweetAdapter extends ArrayAdapter<Status> {
+    protected class TweetAdapter extends ArrayAdapter<Status> {
 
         private LayoutInflater mInflater;
 

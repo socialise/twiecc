@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,31 +34,30 @@ public class MainFragmentActivity extends AppCompatActivity {
             Intent intent = new Intent(MainFragmentActivity.this, TwitterOAuthActivity.class);
             startActivity(intent);
             finish();
-//<<<<<<< HEAD
-//
-//        }else{
-//
-//	        //認証が成功したとき
-//		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//		    fab.setOnClickListener(new View.OnClickListener() {
-//			    @Override
-//			    public void onClick(View view) {
-//
-//					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
-//					startActivity(intent);
-//			    }
-//		    });
-//            FragmentManager fragmentManager = getFragmentManager();
+
+
+        }else{
+
+	        //認証が成功したとき
+		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+		    fab.setOnClickListener(new View.OnClickListener() {
+			    @Override
+			    public void onClick(View view) {
+
+					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
+					startActivity(intent);
+			    }
+		    });
+//            FragmentManager fragmentManager = getSupportFragmentManager();
 //		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //
 //		    Fragment fragment = new BlankFragment();
 //		    fragmentTransaction.add(R.id.fragment, fragment);
 //		    fragmentTransaction.commit();
-//
-//
-//
-//=======
-//>>>>>>> origin/simomura
+
+
+
+
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
