@@ -61,7 +61,8 @@ public class MainFragmentActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+                startActivity(intent);
             }
         });
 
