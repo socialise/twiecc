@@ -121,7 +121,7 @@ public class MainFragmentActivity extends AppCompatActivity {
                     fragment = new MainListFragment();
                     break;
                 case 1:
-                    fragment = new Fragment();
+                    fragment = new MyTweetFragment();
                     break;
                 case 2:
                     fragment = new Fragment();
