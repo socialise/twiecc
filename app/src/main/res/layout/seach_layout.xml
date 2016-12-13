@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+              android:orientation="vertical"
     android:weightSum="1">
 
     <EditText
@@ -11,4 +12,15 @@
         android:ems="10"
         android:hint="@string/search_memo"
         android:id="@+id/keyword" />
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.dai1pan.ListFragment.SearchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/frame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 </LinearLayout>
