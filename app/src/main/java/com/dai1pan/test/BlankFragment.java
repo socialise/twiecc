@@ -1,4 +1,4 @@
-package com.dai1pan;
+package com.dai1pan.test;
 
 
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+import com.dai1pan.R;
 
 
 /**
