@@ -1,6 +1,7 @@
 package com.dai1pan;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,11 +13,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainFragmentActivity extends AppCompatActivity {
 
@@ -33,6 +32,37 @@ public class MainFragmentActivity extends AppCompatActivity {
             Intent intent = new Intent(MainFragmentActivity.this, TwitterOAuthActivity.class);
             startActivity(intent);
             finish();
+
+
+        }else{
+
+	        //認証が成功したとき
+		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+		    fab.setOnClickListener(new View.OnClickListener() {
+			    @Override
+			    public void onClick(View view) {
+
+					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
+					startActivity(intent);
+			    }
+		    });
+
+	        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+		        @Override
+		        public void onClick(View v) {
+			        Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+			        startActivity(intent);
+		        }
+	        });
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//		    Fragment fragment = new BlankFragment();
+//		    fragmentTransaction.add(R.id.fragment, fragment);
+//		    fragmentTransaction.commit();
+
+
+
 
         }
 
@@ -57,15 +87,7 @@ public class MainFragmentActivity extends AppCompatActivity {
             }
         });
 
-        // FloatingActionButton
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -100,8 +122,7 @@ public class MainFragmentActivity extends AppCompatActivity {
                     fragment = new Fragment();
                     break;
                 case 2:
-                    fragment = new MyProfileFragment();
-                    //fragment = new Fragment();
+                    fragment = new Fragment();
                     break;
                 default:
                     fragment = new Fragment();
