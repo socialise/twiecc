@@ -33,31 +33,7 @@ public class MainFragmentActivity extends AppCompatActivity {
             Intent intent = new Intent(MainFragmentActivity.this, TwitterOAuthActivity.class);
             startActivity(intent);
             finish();
-//<<<<<<< HEAD
-//
-//        }else{
-//
-//	        //認証が成功したとき
-//		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//		    fab.setOnClickListener(new View.OnClickListener() {
-//			    @Override
-//			    public void onClick(View view) {
-//
-//					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
-//					startActivity(intent);
-//			    }
-//		    });
-//            FragmentManager fragmentManager = getFragmentManager();
-//		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//		    Fragment fragment = new BlankFragment();
-//		    fragmentTransaction.add(R.id.fragment, fragment);
-//		    fragmentTransaction.commit();
-//
-//
-//
-//=======
-//>>>>>>> origin/simomura
+
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -124,7 +100,8 @@ public class MainFragmentActivity extends AppCompatActivity {
                     fragment = new Fragment();
                     break;
                 case 2:
-                    fragment = new Fragment();
+                    fragment = new MyProfileFragment();
+                    //fragment = new Fragment();
                     break;
                 default:
                     fragment = new Fragment();
