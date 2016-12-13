@@ -10,6 +10,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.dai1pan.Function.DeleteTweet;
+
 public class MainFragmentActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +28,8 @@ public class MainFragmentActivity extends AppCompatActivity {
 
         }else{
 	        //認証が成功したとき
+			DeleteTweet.delete("804520682147061760");
+
 		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		    fab.setOnClickListener(new View.OnClickListener() {
 			    @Override
