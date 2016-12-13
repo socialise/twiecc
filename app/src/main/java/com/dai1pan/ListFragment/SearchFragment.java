@@ -18,19 +18,6 @@ public class SearchFragment extends TemplateTweets{
 	private static final String TEXT_ARG = "text";
 	private String mText;
 
-
-	public static SearchFragment newInstance(String text) {
-
-//		Bundle args = new Bundle();
-//
-//		SearchFragment fragment = new SearchFragment();
-//		fragment.setArguments(args);
-//		args.putString(TEXT_ARG, text);
-//		return fragment;
-
-		return new SearchFragment();
-	}
-
 	public void setSearchWord(String text){
 		mText = text;
 	}
@@ -41,10 +28,6 @@ public class SearchFragment extends TemplateTweets{
 			mText = getArguments().getString(TEXT_ARG);
 		}
 		super.onCreate(savedInstanceState);
-	}
-
-	public void reload(){
-		reloadTweets();
 	}
 
 	@Override
@@ -60,10 +43,10 @@ public class SearchFragment extends TemplateTweets{
 			QueryResult result = mTwitter.search(query);
 
 			return result.getTweets();
+
 		} catch (TwitterException e) {
 			e.printStackTrace();
-
+			return  null;
 		}
-		return  null;
 	}
 }

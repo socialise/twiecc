@@ -47,14 +47,14 @@ public abstract class TemplateTweets extends ListFragment {
 			mAdapter = new TweetAdapter(getActivity());
 			setListAdapter(mAdapter);
 			mTwitter = TwitterUtils.getTwitterInstance(getActivity());
-			//reloadTweets();
+			//loadTweets();
 		}
 	}
 
 	/**
 	 * ツイートを更新する
 	 */
-	protected void reloadTweets() {
+	public void loadTweets() {
 		AsyncTask<Void, Void, List<Status>> task = new async();
 		task.execute();
 	}

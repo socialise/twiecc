@@ -40,7 +40,7 @@ public class SearchActivity extends AppCompatActivity {
 			            (SearchFragment) fm.findFragmentById(R.id.listFragment);    //目的のフラグメントを取得
 
 	            searchFragment.setSearchWord(keyword.getText().toString());         //検索ワードをフラグメントにセット
-	            searchFragment.reload();                                            //リストをリロード
+	            searchFragment.loadTweets();                                            //リストをリロード
 
 //                Runnable run = new Runnable(){
 //                    @Override
