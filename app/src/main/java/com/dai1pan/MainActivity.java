@@ -21,7 +21,7 @@ import com.dai1pan.Base.TwitterOAuthActivity;
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.ListFragment.TimeLineFragment;
 
-public class MainFragmentActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -33,7 +33,7 @@ public class MainFragmentActivity extends AppCompatActivity {
 
         //認証トークスを得てなかった場合は認証用のアクティビティに遷移する
         if (!TwitterUtils.hasAccessToken(this)) {
-            Intent intent = new Intent(MainFragmentActivity.this, TwitterOAuthActivity.class);
+            Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
             startActivity(intent);
             finish();
         }else{
@@ -43,7 +43,7 @@ public class MainFragmentActivity extends AppCompatActivity {
 			    @Override
 			    public void onClick(View view) {
 
-					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
+					Intent intent = new Intent(MainActivity.this, WriteTweetActivity.class);
 					startActivity(intent);
 			    }
 		    });
@@ -51,7 +51,7 @@ public class MainFragmentActivity extends AppCompatActivity {
 	        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
 		        @Override
 		        public void onClick(View v) {
-			        Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+			        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
 			        startActivity(intent);
 		        }
 	        });

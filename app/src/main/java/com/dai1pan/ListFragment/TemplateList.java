@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.dai1pan.R;
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.R;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -25,7 +27,7 @@ import twitter4j.TwitterException;
  * Created by 2140087 on 2016/12/09.
  */
 
-public abstract class TemplateTweets extends ListFragment {
+public abstract class TemplateList extends ListFragment {
 
 	protected TweetAdapter mAdapter;
 	protected Twitter mTwitter;
@@ -47,7 +49,8 @@ public abstract class TemplateTweets extends ListFragment {
 			mAdapter = new TweetAdapter(getActivity());
 			setListAdapter(mAdapter);
 			mTwitter = TwitterUtils.getTwitterInstance(getActivity());
-			//loadTweets();
+			//loadTweets(); //左記のメソッドはActivity側で呼び出す
+
 		}
 	}
 
@@ -57,6 +60,12 @@ public abstract class TemplateTweets extends ListFragment {
 	public void loadTweets() {
 		AsyncTask<Void, Void, List<Status>> task = new async();
 		task.execute();
+	}
+
+	//ﾂｲｰﾄをｸﾘｯｸした時に呼ばれるｺｰﾙﾊﾞｯｸﾒｿｯﾄﾞ
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		Toast.makeText(getActivity(), "実験成功", Toast.LENGTH_SHORT).show();
 	}
 
 	//Stringデータを管理するアダプター
@@ -71,6 +80,7 @@ public abstract class TemplateTweets extends ListFragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.list_item_tweet, null);
 			}

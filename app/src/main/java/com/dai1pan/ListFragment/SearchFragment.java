@@ -13,7 +13,7 @@ import twitter4j.TwitterException;
  * 作成者 : 副島 祐希
  * 作成日 : 2016-12-10.
  */
-public class SearchFragment extends TemplateTweets{
+public class SearchFragment extends TemplateList {
 
 	private static final String TEXT_ARG = "text";
 	private String mText;

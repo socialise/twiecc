@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.dai1pan.MainFragmentActivity;
+import com.dai1pan.MainActivity;
 import com.dai1pan.R;
 
 import twitter4j.Twitter;
@@ -109,7 +109,7 @@ public class TwitterOAuthActivity extends android.app.Activity {
 
     private void successOAuth(AccessToken accessToken) {
         TwitterUtils.storeAccessToken(this, accessToken);
-        Intent intent = new Intent(this, MainFragmentActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
