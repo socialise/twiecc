@@ -16,8 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.dai1pan.R;
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.R;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -32,8 +32,11 @@ import twitter4j.TwitterException;
 
 public class TimeLineFragment extends ListFragment{
 
+	private final String TAG = getClass().getName();
+
     protected TweetAdapter mAdapter;
     protected Twitter mTwitter;
+	protected long mUserId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class TimeLineFragment extends ListFragment{
             @Override
             protected List<twitter4j.Status> doInBackground(Void... params) {
                 try {
+	                mUserId = mTwitter.getId();
                     return mTwitter.getHomeTimeline();
                 } catch (TwitterException e) {
                     e.printStackTrace();
@@ -92,15 +96,30 @@ public class TimeLineFragment extends ListFragment{
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.list_item_tweet, null);
             }
+
             Status item = getItem(position);
-            TextView name = (TextView) convertView.findViewById(R.id.name);
-            name.setText(item.getUser().getName());
-            TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);
-            screenName.setText("@" + item.getUser().getScreenName());
-            TextView text = (TextView) convertView.findViewById(R.id.text);
-            text.setText(item.getText());
+
+	        //削除ボタンの記述
+	        View deleteBtn = convertView.findViewById(R.id.deleteButton);
+	        if (item.getUser().getId() == mUserId) {
+		        deleteBtn.setTag(item.getId()); //削除ボタンのタグにツイートIDを格納(long型)
+		        deleteBtn.setVisibility(View.VISIBLE);
+	        } else {
+		        deleteBtn.setVisibility(View.INVISIBLE);
+	        }
+
+	        TextView name = (TextView) convertView.findViewById(R.id.name);
+	        name.setText(item.getUser().getName());
+
+	        TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);
+	        screenName.setText("@" + item.getUser().getScreenName());
+
+	        TextView text = (TextView) convertView.findViewById(R.id.text);
+	        text.setText(item.getText());
+
             SmartImageView icon = (SmartImageView) convertView.findViewById(R.id.icon);
             icon.setImageUrl(item.getUser().getProfileImageURL());
+
             return convertView;
         }
 

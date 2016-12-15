@@ -3,9 +3,8 @@ package com.dai1pan;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.ListFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ public class MyTweetFragment extends ListFragment {
 
 	private TweetAdapter mAdapter;
 	private Twitter mTwitter;
+	protected long mUserId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class MyTweetFragment extends ListFragment {
 			@Override
 			protected List<twitter4j.Status> doInBackground(Void... params) {
 				try {
+					mUserId = mTwitter.getId();
 					//return mTwitter.getHomeTimeline();
 					return mTwitter.getUserTimeline();
 				} catch (TwitterException e) {
@@ -86,6 +87,16 @@ public class MyTweetFragment extends ListFragment {
 				convertView = mInflater.inflate(R.layout.list_item_tweet, null);
 			}
 			Status item = getItem(position);
+
+			//削除ボタンの記述
+			View deleteBtn = convertView.findViewById(R.id.deleteButton);
+			if (item.getUser().getId() == mUserId) {
+				deleteBtn.setTag(item.getId()); //削除ボタンのタグにツイートIDを格納(long型)
+				deleteBtn.setVisibility(View.VISIBLE);
+			} else {
+				deleteBtn.setVisibility(View.INVISIBLE);
+			}
+
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getUser().getName());
 			TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);

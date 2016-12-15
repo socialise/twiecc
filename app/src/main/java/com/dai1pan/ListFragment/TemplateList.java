@@ -31,6 +31,7 @@ public abstract class TemplateList extends ListFragment {
 
 	protected TweetAdapter mAdapter;
 	protected Twitter mTwitter;
+	private long mUserId;
 
 	/**
 	 * フラグメントを追加する。
@@ -94,6 +95,11 @@ public abstract class TemplateList extends ListFragment {
 
 			convertView.setTag(item); //タグにツイート情報(Status)を格納する
 
+			if (item.getUser().getId() == mUserId) {
+
+				View deleteBtn = convertView.findViewById(R.id.deleteButton);
+				deleteBtn.setVisibility(View.VISIBLE);
+			}
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getUser().getName());
 
@@ -116,6 +122,7 @@ public abstract class TemplateList extends ListFragment {
 		@Override
 		protected List<twitter4j.Status> doInBackground(Void... params) {
 			try {
+				mUserId = mTwitter.getId();
 				//オーバーライドされたsetListメソッドを実行する
 				return setList();
 			} catch (TwitterException e) {
@@ -131,7 +138,11 @@ public abstract class TemplateList extends ListFragment {
 				for (twitter4j.Status status : result) {
 					mAdapter.add(status);
 				}
-				getListView().setSelection(0);
+				try {
+					getListView().setSelection(0);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				}
 			}
 			//else { showToast("タイムラインの取得に失敗しました。。。"); }
 		}
