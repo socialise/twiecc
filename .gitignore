@@ -23,5 +23,5 @@ app/build/
 
 .idea/*.xml
 
-!.idea/gradle.xml
+#!.idea/gradle.xml
 !.idea/runConfigurations/*.xml
