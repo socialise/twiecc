@@ -1,8 +1,10 @@
-package com.dai1pan;
+package com.dai1pan.Base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.dai1pan.R;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;

@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.dai1pan.R;
-import com.dai1pan.TwitterUtils;
+import com.dai1pan.Base.TwitterUtils;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -90,14 +90,12 @@ public abstract class TemplateTweets extends ListFragment {
 
 	}
 
-
-
 	protected class async extends AsyncTask<Void, Void, List<twitter4j.Status>>{
 
 		@Override
 		protected List<twitter4j.Status> doInBackground(Void... params) {
 			try {
-
+				//オーバーライドされたsetListメソッドを実行する
 				return setList();
 			} catch (TwitterException e) {
 				e.printStackTrace();

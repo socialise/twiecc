@@ -1,4 +1,4 @@
-package com.dai1pan;
+package com.dai1pan.ListFragment;
 
 /**
  * Created by yutakohashi on 2016/11/28.
@@ -7,7 +7,6 @@ package com.dai1pan;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -17,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.dai1pan.R;
+import com.dai1pan.Base.TwitterUtils;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import twitter4j.TwitterException;
  * Created by yutakohashi on 2016/11/18.
  */
 
-public class MainListFragment extends ListFragment{
+public class TimeLineFragment extends ListFragment{
 
     protected TweetAdapter mAdapter;
     protected Twitter mTwitter;

@@ -1,4 +1,4 @@
-package com.dai1pan;
+package com.dai1pan.Base;
 
 
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.dai1pan.MainFragmentActivity;
+import com.dai1pan.R;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;

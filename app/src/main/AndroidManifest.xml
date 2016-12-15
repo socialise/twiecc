@@ -13,7 +13,7 @@
 
         <!-- Twitter4Jをはじめて使うテスト用の記述 -->
         <activity
-            android:name=".TwitterOAuthActivity"
+            android:name=".Base.TwitterOAuthActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

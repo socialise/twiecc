@@ -40,20 +40,8 @@ public class SearchActivity extends AppCompatActivity {
 			            (SearchFragment) fm.findFragmentById(R.id.listFragment);    //目的のフラグメントを取得
 
 	            searchFragment.setSearchWord(keyword.getText().toString());         //検索ワードをフラグメントにセット
-	            searchFragment.loadTweets();                                            //リストをリロード
+	            searchFragment.loadTweets();                                        //リストをリロード
 
-//                Runnable run = new Runnable(){
-//                    @Override
-//                    public void run(){
-//                        search(keyword.getText().toString());
-//                    }
-//                };
-//	            search(keyword.getText().toString());
-
-//                Thread otherThr = new Thread(run); //スレッドのインスタンスに処理内容を格納
-//                otherThr.start();
-
-                final String text = keyword.getText().toString();
                 //イベントを取得するタイミングには、ボタンが押されてなおかつエンターキーだったときを指定
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     //キーボードを閉じる
@@ -66,40 +54,6 @@ public class SearchActivity extends AppCompatActivity {
             }
 
         });
-
-
-
-    }
-
-    public void search(String text){
-
-//        try {
-
-//	        fragmentTransaction.add(R.id.frame, new TestFragment());
-
-//            //自動的に認証してくれる
-//            //（バージョン2.2.4以降はgetInstance()ではなくgetSingleton()を推奨）
-//            Twitter twitter = TwitterUtils.getTwitterInstance(this);
-//            Query query = new Query();
-//
-//            query.setQuery(text);// キーワードが含まれているツイート取得
-//            query.setLang("ja");// ユーザが設定した使用言語
-//
-//            //検索結果を取得
-//            QueryResult result = twitter.search(query);
-//            List<Status> tresult = result.getTweets();
-//
-//            //ツイートの表示
-//            for (Status tweet : tresult) {
-//                Log.v("Search", "@" + tweet.getUser().getScreenName() + ":" + tweet.getText());
-//            }
-//
-//            } catch(TwitterException te){
-//                te.printStackTrace();
-//            } catch(Exception e){
-//                e.printStackTrace();
-//            }
-
     }
 
 }
