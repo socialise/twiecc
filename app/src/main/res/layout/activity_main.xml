@@ -25,12 +25,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
-                    app:layout_scrollFlags="scroll|enterAlways"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/search_button"
-                    android:layout_toEndOf="@+id/search_button"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginStart="23dp" />
+                    />
 
                 <ImageButton
                     android:id="@+id/search_button"
