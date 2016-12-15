@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.dai1pan.Base.TwitterUtils;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
