@@ -38,4 +38,29 @@
         android:layout_below="@+id/name"
         android:text="本文本文本文本文本文本文本文本文本文本文" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:orientation="horizontal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="⇐"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="\u21BB"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="♥"/>
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="★"/>
+    </LinearLayout>
 </RelativeLayout>

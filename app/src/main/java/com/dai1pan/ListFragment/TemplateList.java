@@ -5,13 +5,13 @@ import android.app.ListFragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.R;
@@ -65,7 +65,13 @@ public abstract class TemplateList extends ListFragment {
 	//ﾂｲｰﾄをｸﾘｯｸした時に呼ばれるｺｰﾙﾊﾞｯｸﾒｿｯﾄﾞ
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Toast.makeText(getActivity(), "実験成功", Toast.LENGTH_SHORT).show();
+		//TODO クリックした時の動作処理記述
+
+		Status status = (Status) v.getTag();
+		new AlertDialog.Builder( getActivity() )
+				.setTitle(status.getUser().getName() + "さんのツイート")
+				.setMessage( status.getText() )
+		.show();
 	}
 
 	//Stringデータを管理するアダプター
@@ -85,10 +91,15 @@ public abstract class TemplateList extends ListFragment {
 				convertView = mInflater.inflate(R.layout.list_item_tweet, null);
 			}
 			Status item = getItem(position);
+
+			convertView.setTag(item); //タグにツイート情報(Status)を格納する
+
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getUser().getName());
+
 			TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);
 			screenName.setText("@" + item.getUser().getScreenName());
+
 			TextView text = (TextView) convertView.findViewById(R.id.text);
 			text.setText(item.getText());
 
@@ -121,9 +132,8 @@ public abstract class TemplateList extends ListFragment {
 					mAdapter.add(status);
 				}
 				getListView().setSelection(0);
-			} else {
-//                    showToast("タイムラインの取得に失敗しました。。。");
 			}
+			//else { showToast("タイムラインの取得に失敗しました。。。"); }
 		}
 	}
 }
