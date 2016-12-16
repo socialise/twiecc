@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.dai1pan.Base.TwitterUtils;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.User;

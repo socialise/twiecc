@@ -17,9 +17,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.dai1pan.Base.TwitterOAuthActivity;
+import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.Function.DeleteTweet;
+import com.dai1pan.ListFragment.TimeLineFragment;
 
-public class MainFragmentActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -27,11 +30,11 @@ public class MainFragmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
 
         //認証トークスを得てなかった場合は認証用のアクティビティに遷移する
         if (!TwitterUtils.hasAccessToken(this)) {
-            Intent intent = new Intent(MainFragmentActivity.this, TwitterOAuthActivity.class);
+            Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
             startActivity(intent);
             finish();
 
@@ -46,7 +49,7 @@ public class MainFragmentActivity extends AppCompatActivity {
 			    @Override
 			    public void onClick(View view) {
 
-					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
+					Intent intent = new Intent(MainActivity.this, WriteTweetActivity.class);
 					startActivity(intent);
 			    }
 		    });
@@ -54,7 +57,7 @@ public class MainFragmentActivity extends AppCompatActivity {
 	        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
 		        @Override
 		        public void onClick(View v) {
-			        Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
+			        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
 			        startActivity(intent);
 		        }
 	        });
@@ -120,10 +123,10 @@ public class MainFragmentActivity extends AppCompatActivity {
             Fragment fragment;
             switch (position) {
                 case 0:
-                    fragment = new MainListFragment();
+                    fragment = new TimeLineFragment();
                     break;
                 case 1:
-                    fragment = new Fragment();
+                    fragment = new MyTweetFragment();
                     break;
                 case 2:
                     fragment = new Fragment();
