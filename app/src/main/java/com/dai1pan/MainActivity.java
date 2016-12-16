@@ -19,7 +19,6 @@ import android.view.View;
 
 import com.dai1pan.Base.TwitterOAuthActivity;
 import com.dai1pan.Base.TwitterUtils;
-import com.dai1pan.Function.DeleteTweet;
 import com.dai1pan.ListFragment.TimeLineFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
 
 	        //認証が成功したとき
-			DeleteTweet.delete("804520682147061760");
+//			DeleteTweet.delete("804520682147061760");
 
 		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		    fab.setOnClickListener(new View.OnClickListener() {
