@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.Function.DeleteTweet;
 import com.dai1pan.R;
 import com.loopj.android.image.SmartImageView;
 
@@ -103,6 +104,12 @@ public class TimeLineFragment extends ListFragment{
 	        View deleteBtn = convertView.findViewById(R.id.deleteButton);
 	        if (item.getUser().getId() == mUserId) {
 		        deleteBtn.setTag(item.getId()); //削除ボタンのタグにツイートIDを格納(long型)
+                deleteBtn.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        DeleteTweet.delete((long)v.getTag());
+                    }
+                });
 		        deleteBtn.setVisibility(View.VISIBLE);
 	        } else {
 		        deleteBtn.setVisibility(View.INVISIBLE);
