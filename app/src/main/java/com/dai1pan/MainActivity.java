@@ -17,11 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.dai1pan.Base.TwitterOAuthActivity;
-import com.dai1pan.Base.TwitterUtils;
-import com.dai1pan.ListFragment.TimeLineFragment;
+import com.dai1pan.Function.DeleteTweet;
 
-public class MainActivity extends AppCompatActivity {
+public class MainFragmentActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -29,21 +27,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
         //認証トークスを得てなかった場合は認証用のアクティビティに遷移する
         if (!TwitterUtils.hasAccessToken(this)) {
-            Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
+            Intent intent = new Intent(MainFragmentActivity.this, TwitterOAuthActivity.class);
             startActivity(intent);
             finish();
+
+
         }else{
+
 	        //認証が成功したとき
+			DeleteTweet.delete("804520682147061760");
+
 		    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 		    fab.setOnClickListener(new View.OnClickListener() {
 			    @Override
 			    public void onClick(View view) {
 
-					Intent intent = new Intent(MainActivity.this, WriteTweetActivity.class);
+					Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
 					startActivity(intent);
 			    }
 		    });
@@ -51,10 +54,20 @@ public class MainActivity extends AppCompatActivity {
 	        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
 		        @Override
 		        public void onClick(View v) {
-			        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+			        Intent intent = new Intent(MainFragmentActivity.this, SearchActivity.class);
 			        startActivity(intent);
 		        }
 	        });
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//		    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//		    Fragment fragment = new BlankFragment();
+//		    fragmentTransaction.add(R.id.fragment, fragment);
+//		    fragmentTransaction.commit();
+
+
+
+
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -107,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (position) {
                 case 0:
-                    fragment = new TimeLineFragment();
+                    fragment = new MainListFragment();
                     break;
                 case 1:
-                    fragment = new MyTweetFragment();
+                    fragment = new Fragment();
                     break;
                 case 2:
                     fragment = new Fragment();
