@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -122,10 +123,12 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (position) {
                 case 0:
+	                Log.v(getClass().getName(), "フラグメント作成 Tab0");
                     fragment = new TimeLineFragment();
                     break;
                 case 1:
-                    fragment = new MyTweetFragment();
+	                Log.v(getClass().getName(), "フラグメント作成");
+	                fragment = new MyTweetFragment();
                     break;
                 case 2:
                     fragment = new Fragment();

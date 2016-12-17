@@ -9,11 +9,7 @@ import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
-/**
- * 作成者 : 副島 祐希
- * 作成日 : 2016-12-10.
- */
-public class SearchFragment extends TemplateList {
+public class SearchFragment extends TemplateList_v4 {
 
 	private static final String TEXT_ARG = "text";
 	private String mText;

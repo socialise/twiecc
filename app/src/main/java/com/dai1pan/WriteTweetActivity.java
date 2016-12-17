@@ -39,7 +39,6 @@ public class WriteTweetActivity extends AppCompatActivity {
                             Status status = null;
                             status = twitter.updateStatus(editText.getText().toString());
                         } catch (TwitterException e) {
-                            // TODO 自動生成された catch ブロック
                             e.printStackTrace();
                         }
                     }

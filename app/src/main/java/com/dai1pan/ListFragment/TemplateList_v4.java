@@ -1,7 +1,6 @@
 package com.dai1pan.ListFragment;
 
 import android.app.Activity;
-import android.app.ListFragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,7 +26,9 @@ import twitter4j.TwitterException;
  * Created by 2140087 on 2016/12/09.
  */
 
-public abstract class TemplateList extends ListFragment {
+public abstract class TemplateList_v4
+		extends android.support.v4.app.ListFragment
+{
 
 	protected TweetAdapter mAdapter;
 	protected Twitter mTwitter;
@@ -111,13 +112,13 @@ public abstract class TemplateList extends ListFragment {
 
 			SmartImageView icon = (SmartImageView) convertView.findViewById(R.id.icon);
 			icon.setImageUrl(item.getUser().getProfileImageURL());
-
+			
 			return convertView;
 		}
 
 	}
 
-	protected class async extends AsyncTask<Void, Void, List<twitter4j.Status>>{
+	protected class async extends AsyncTask<Void, Void, List<Status>>{
 
 		@Override
 		protected List<twitter4j.Status> doInBackground(Void... params) {
