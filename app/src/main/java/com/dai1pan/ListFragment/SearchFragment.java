@@ -9,7 +9,7 @@ import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
-public class SearchFragment extends TemplateList {
+public class SearchFragment extends TemplateList_v4 {
 
 	private static final String TEXT_ARG = "text";
 	private String mText;

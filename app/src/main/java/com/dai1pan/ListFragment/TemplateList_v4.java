@@ -26,7 +26,9 @@ import twitter4j.TwitterException;
  * Created by 2140087 on 2016/12/09.
  */
 
-public abstract class TemplateList_v4 extends android.support.v4.app.ListFragment {
+public abstract class TemplateList_v4
+		extends android.support.v4.app.ListFragment
+{
 
 	protected TweetAdapter mAdapter;
 	protected Twitter mTwitter;

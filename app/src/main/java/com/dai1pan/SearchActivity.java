@@ -1,8 +1,8 @@
 package com.dai1pan;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -35,7 +35,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
-	            FragmentManager fm = getFragmentManager(); //フラグメントマネージャを取得
+	            FragmentManager fm = getSupportFragmentManager(); //フラグメントマネージャを取得
 	            SearchFragment searchFragment =
 			            (SearchFragment) fm.findFragmentById(R.id.listFragment);    //目的のフラグメントを取得
 
