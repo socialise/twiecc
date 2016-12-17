@@ -112,7 +112,7 @@ public abstract class TemplateList_v4
 
 			SmartImageView icon = (SmartImageView) convertView.findViewById(R.id.icon);
 			icon.setImageUrl(item.getUser().getProfileImageURL());
-
+			
 			return convertView;
 		}
 
