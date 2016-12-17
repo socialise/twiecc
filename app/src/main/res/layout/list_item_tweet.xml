@@ -66,12 +66,13 @@
 
     <TextView
         android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:text="×"
         android:layout_alignTop="@+id/screen_name"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp"/>
+        android:layout_above="@+id/text"
+        android:gravity="center_horizontal"/>
 </RelativeLayout>
