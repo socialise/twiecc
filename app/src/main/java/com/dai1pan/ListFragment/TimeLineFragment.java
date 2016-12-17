@@ -7,16 +7,20 @@ package com.dai1pan.ListFragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.Function.DeleteTweet;
 import com.dai1pan.R;
 import com.loopj.android.image.SmartImageView;
 
@@ -103,6 +107,25 @@ public class TimeLineFragment extends ListFragment{
 	        View deleteBtn = convertView.findViewById(R.id.deleteButton);
 	        if (item.getUser().getId() == mUserId) {
 		        deleteBtn.setTag(item.getId()); //削除ボタンのタグにツイートIDを格納(long型)
+
+                deleteBtn.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(final View v) {
+	                    Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+	                    new AlertDialog.Builder(getActivity())
+			                    .setMessage("ツイートを削除しますか？")
+			                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				                    @Override
+				                    public void onClick(DialogInterface dialog, int which) {
+					                    new Thread(
+							                    new DeleteTweet((long)v.getTag()) )
+							                    .start();
+				                    }
+			                    })
+			                    .show();
+                    }
+                });
+
 		        deleteBtn.setVisibility(View.VISIBLE);
 	        } else {
 		        deleteBtn.setVisibility(View.INVISIBLE);
@@ -124,4 +147,6 @@ public class TimeLineFragment extends ListFragment{
         }
 
     }
+
+
 }
