@@ -112,17 +112,20 @@ public class TimeLineFragment extends ListFragment{
                     @Override
                     public void onClick(final View v) {
 	                    Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+
+	                    //region ダイアログの作成→承認→削除
 	                    new AlertDialog.Builder(getActivity())
 			                    .setMessage("ツイートを削除しますか？")
 			                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				                    @Override
 				                    public void onClick(DialogInterface dialog, int which) {
-					                    new Thread(
-							                    new DeleteTweet((long)v.getTag()) )
+					                    //TODO 削除処理
+					                    new Thread( new DeleteTweet() )
 							                    .start();
 				                    }
 			                    })
 			                    .show();
+	                    //endregion
                     }
                 });
 
