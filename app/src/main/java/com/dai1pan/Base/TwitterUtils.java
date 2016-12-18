@@ -53,7 +53,7 @@ public class TwitterUtils {
     }
 
 	public static Twitter getTwitterInstance(){
-		Context context = ApplicationController.getInstance();
+		Context context = MyContext.getApplicationContext();
 
 		String consumerKey = context.getString(R.string.twitter_consumer_key);
 		String consumerSecret = context.getString(R.string.twitter_consumer_secret);

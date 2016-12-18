@@ -1,21 +1,21 @@
 package com.dai1pan.Base;
 
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
-/**
- * 作成者 : 副島 祐希
- * 作成日 : 2016-12-17.
- */
 public class ApplicationController extends Application {
-	private static ApplicationController sInstance;
-
+	private static ApplicationController instance = null;
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		sInstance = this;
+		Log.v(getClass().getName(), "onCreate");
+		instance = this;
 	}
 
-	public static synchronized ApplicationController getInstance() {
-		return sInstance;
+	public static ApplicationController getInstance() {
+		return instance;
 	}
 }
+
+

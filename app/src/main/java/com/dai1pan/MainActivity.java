@@ -49,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
 			    }
 		    });
 
-	        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
-		        @Override
-		        public void onClick(View v) {
-			        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-			        startActivity(intent);
-		        }
-	        });
+	        //TODO コメントアウトを外す
+//	        findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
+//		        @Override
+//		        public void onClick(View v) {
+//			        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+//			        startActivity(intent);
+//		        }
+//	        });
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
