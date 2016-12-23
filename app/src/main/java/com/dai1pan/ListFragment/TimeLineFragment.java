@@ -116,11 +116,12 @@ public class TimeLineFragment extends ListFragment{
 	                    //region ダイアログの作成→承認→削除
 	                    new AlertDialog.Builder(getActivity())
 			                    .setMessage("ツイートを削除しますか？")
+			                    .setNegativeButton("キャンセル", null)
 			                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				                    @Override
 				                    public void onClick(DialogInterface dialog, int which) {
 					                    //TODO 削除処理
-					                    new Thread( new DeleteTweet() )
+					                    new Thread( new DeleteTweet((long)v.getTag()) )
 							                    .start();
 				                    }
 			                    })
