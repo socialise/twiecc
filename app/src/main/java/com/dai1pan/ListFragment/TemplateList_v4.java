@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.Function.DeleteTweet;
@@ -105,7 +104,6 @@ public abstract class TemplateList_v4
 				deleteBtn.setOnClickListener(new View.OnClickListener(){
 					@Override
 					public void onClick(final View v) {
-						Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
 
 						//region ダイアログの作成→承認→削除
 						new AlertDialog.Builder(getActivity())
