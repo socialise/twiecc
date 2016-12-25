@@ -2,6 +2,7 @@ package com.dai1pan.ListFragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -11,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.Function.DeleteTweet;
 import com.dai1pan.R;
 import com.loopj.android.image.SmartImageView;
 
@@ -88,19 +91,44 @@ public abstract class TemplateList_v4
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.list_item_tweet, null);
 			}
+
 			Status item = getItem(position);
 
-			convertView.setTag(item); //タグにツイート情報(Status)を格納する
-
+			//削除ボタンの記述
+			View deleteBtn = convertView.findViewById(R.id.deleteButton);
 			if (item.getUser().getId() == mUserId) {
+				deleteBtn.setTag(item.getId()); //削除ボタンのタグにツイートIDを格納(long型)
 
-				View deleteBtn = convertView.findViewById(R.id.deleteButton);
+				deleteBtn.setOnClickListener(new View.OnClickListener(){
+					@Override
+					public void onClick(final View v) {
+						Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+
+						//region ダイアログの作成→承認→削除
+						new AlertDialog.Builder(getActivity())
+								.setMessage("ツイートを削除しますか？")
+								.setNegativeButton("キャンセル", null)
+								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										//TODO 削除処理
+										new Thread( new DeleteTweet((long)v.getTag()) )
+												.start();
+									}
+								})
+								.show();
+						//endregion
+					}
+				});
+
 				deleteBtn.setVisibility(View.VISIBLE);
+			} else {
+				deleteBtn.setVisibility(View.INVISIBLE);
 			}
+
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getUser().getName());
 
@@ -112,7 +140,7 @@ public abstract class TemplateList_v4
 
 			SmartImageView icon = (SmartImageView) convertView.findViewById(R.id.icon);
 			icon.setImageUrl(item.getUser().getProfileImageURL());
-			
+
 			return convertView;
 		}
 

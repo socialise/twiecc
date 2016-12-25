@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.dai1pan.Base.TwitterOAuthActivity;
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.ListFragment.MyTweetFragment;
 import com.dai1pan.ListFragment.TimeLineFragment;
 
 public class MainActivity extends AppCompatActivity {
