@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dai1pan">
+<manifest package="com.dai1pan"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".Base.ApplicationController"
@@ -17,29 +17,30 @@
             android:name=".Base.TwitterOAuthActivity"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
                     android:host="twitter"
-                    android:scheme="gabu" />
+                    android:scheme="gabu"/>
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".WriteTweetActivity"
-            android:label="ツイート書込み"></activity>
-        <activity android:name=".LikeListActivity"></activity>
-
-        <activity android:name=".SearchActivity" />
+            android:label="ツイート書込み"/>
+        <activity android:name=".LikeListActivity"/>
+        <activity android:name=".SearchActivity"/>
+        <activity android:name=".Detail.DetailTweetActivity">
+        </activity>
     </application>
 
 </manifest>
