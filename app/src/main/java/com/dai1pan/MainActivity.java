@@ -117,8 +117,11 @@ public class MainActivity extends AppCompatActivity {
 	                fragment = new MyTweetFragment();
                     break;
                 case 2:
-                    fragment = new Fragment();
+                    fragment = new MyProfileFragment();
                     break;
+	            case 3:
+		            fragment = SpecificTweetsFragment.newInstance(2407902008L);
+		            break;
                 default:
                     fragment = new Fragment();
             }
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.Function.DeleteTweet;
@@ -35,6 +36,7 @@ public abstract class TemplateList_v4
 	protected TweetAdapter mAdapter;
 	protected Twitter mTwitter;
 	private long mUserId;
+
 
 	/**
 	 * フラグメントを追加する。
@@ -62,6 +64,7 @@ public abstract class TemplateList_v4
 	 * ツイートを更新する
 	 */
 	public void loadTweets() {
+		Toast.makeText(this.getContext(), "ろーどしました", Toast.LENGTH_LONG).show();
 		AsyncTask<Void, Void, List<Status>> task = new async();
 		task.execute();
 	}
@@ -96,6 +99,9 @@ public abstract class TemplateList_v4
 
 			Status item = getItem(position);
 
+
+//			parent.removeViewAt(position);
+
 			//削除ボタンの記述
 			View deleteBtn = convertView.findViewById(R.id.deleteButton);
 			if (item.getUser().getId() == mUserId) {
@@ -107,7 +113,8 @@ public abstract class TemplateList_v4
 
 						//region ダイアログの作成→承認→削除
 						new AlertDialog.Builder(getActivity())
-								.setMessage("ツイートを削除しますか？")
+								//.setMessage("ツイートを削除しますか？")
+								.setMessage(v.getTag().toString())
 								.setNegativeButton("キャンセル", null)
 								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 									@Override
@@ -115,6 +122,18 @@ public abstract class TemplateList_v4
 										//TODO 削除処理
 										new Thread( new DeleteTweet((long)v.getTag()) )
 												.start();
+
+
+										//削除後、読み込みが早すぎると、TLに削除済みツイートが表示されるため
+										//ディレイを掛ける(設定時間は要検討)
+										try {
+											Thread.sleep(200);
+										} catch (InterruptedException e) {
+											e.printStackTrace();
+										}
+
+										loadTweets(); //TL再読込
+
 									}
 								})
 								.show();

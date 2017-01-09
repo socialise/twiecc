@@ -1,5 +1,7 @@
 package com.dai1pan.Function;
 
+import com.dai1pan.Base.TwitterUtils;
+
 import twitter4j.*;
 
 /**
@@ -15,7 +17,7 @@ public class DeleteTweet implements Runnable{
 	}
 
 	public static void delete(Long id){
-		Twitter twitter = new TwitterFactory().getInstance();
+		Twitter twitter = TwitterUtils.getTwitterInstance();
 		try {
 			twitter.destroyStatus(id);
 		}catch (TwitterException e){
@@ -26,6 +28,8 @@ public class DeleteTweet implements Runnable{
 
 	@Override
 	public void run() {
+
+		delete(id);
 
 	}
 }

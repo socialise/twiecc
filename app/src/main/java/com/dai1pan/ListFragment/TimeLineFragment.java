@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,12 @@ public class TimeLineFragment extends ListFragment{
                     for (twitter4j.Status status : result) {
                         mAdapter.add(status);
                     }
-                    getListView().setSelection(0);
+	                try{
+		                getListView().setSelection(0);
+	                }catch (IllegalStateException e){
+		                Log.v("",e.toString());
+	                }
+
                 } else {
 //                    showToast("タイムラインの取得に失敗しました。。。");
                 }
