@@ -41,6 +41,8 @@
         <activity android:name=".SearchActivity"/>
         <activity android:name=".Detail.DetailTweetActivity">
         </activity>
+        <activity android:name=".test">
+        </activity>
     </application>
 
 </manifest>

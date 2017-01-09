@@ -20,7 +20,7 @@ public class SpecificTweetsFragment extends TemplateList_v4 {
 
 	private static final String USER_ID = "param1";
 
-	private String userId;
+	private long userId;
 
 	public static SpecificTweetsFragment newInstance(long id) {
 		SpecificTweetsFragment fragment = new SpecificTweetsFragment();
@@ -35,13 +35,15 @@ public class SpecificTweetsFragment extends TemplateList_v4 {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			userId = getArguments().getString(USER_ID);
+			userId = getArguments().getLong(USER_ID);
 
 		}
 	}
 
 	@Override
 	protected List<Status> setList() throws TwitterException {
+
+		//Toast.makeText(getContext(), "" + userId, Toast.LENGTH_SHORT).show();
 		return mTwitter.getUserTimeline(userId);
 	}
 

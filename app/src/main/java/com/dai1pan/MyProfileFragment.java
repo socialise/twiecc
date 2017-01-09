@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
 import com.loopj.android.image.SmartImageView;
@@ -92,25 +91,25 @@ public class MyProfileFragment extends Fragment {
 		mTextFollw = (TextView) v.findViewById(R.id.followText);
 		mTextFollower = (TextView) v.findViewById(R.id.followerText);
 
-		Toast.makeText(
-
-				getContext(),
-
-				this.
-
-						getClass()
-
-						.
-
-								getName()
-
-						.
-
-								toString(), Toast
-
-						.LENGTH_SHORT).
-
-				show();
+//		Toast.makeText(
+//
+//				getContext(),
+//
+//				this.
+//
+//						getClass()
+//
+//						.
+//
+//								getName()
+//
+//						.
+//
+//								toString(), Toast
+//
+//						.LENGTH_SHORT).
+//
+//				show();
 
 		//自分のユーザIDを取得して引数に渡す
 		final Handler handler = new Handler();

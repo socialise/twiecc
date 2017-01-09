@@ -3,6 +3,7 @@ package com.dai1pan.ListFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.Function.DeleteTweet;
 import com.dai1pan.R;
+import com.dai1pan.test;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.List;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.User;
 
 /**
  * Created by 2140087 on 2016/12/09.
@@ -146,6 +149,9 @@ public abstract class TemplateList_v4
 				deleteBtn.setVisibility(View.INVISIBLE);
 			}
 
+			//細かなツイート表示
+			final User user  = item.getUser();
+
 			TextView name = (TextView) convertView.findViewById(R.id.name);
 			name.setText(item.getUser().getName());
 
@@ -156,6 +162,14 @@ public abstract class TemplateList_v4
 			text.setText(item.getText());
 
 			SmartImageView icon = (SmartImageView) convertView.findViewById(R.id.icon);
+			icon.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getContext(), test.class);
+					startActivity(intent);
+				}
+			});
+
 			icon.setImageUrl(item.getUser().getProfileImageURL());
 
 			return convertView;
