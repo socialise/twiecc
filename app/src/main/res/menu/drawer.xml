@@ -4,4 +4,9 @@
         android:id="@+id/navigation_item_attachment"
         android:checked="true"
         android:title="メニュー" />
+
+    <item
+        android:id="@+id/navigation_item_account"
+        android:title="アカウント管理" />
+
 </menu>

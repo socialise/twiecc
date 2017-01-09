@@ -16,14 +16,14 @@ import twitter4j.TwitterException;
  * 作成者 : 副島 祐希
  * 作成日 : 2017-01-09.
  */
-public class SpecificTweetsFragment extends TemplateList_v4 {
+public class SomebodyTweetsFragment extends TemplateList_v4 {
 
 	private static final String USER_ID = "param1";
 
 	private long userId;
 
-	public static SpecificTweetsFragment newInstance(long id) {
-		SpecificTweetsFragment fragment = new SpecificTweetsFragment();
+	public static SomebodyTweetsFragment newInstance(long id) {
+		SomebodyTweetsFragment fragment = new SomebodyTweetsFragment();
 		Bundle args = new Bundle();
 		args.putLong(USER_ID, id);
 

@@ -24,16 +24,24 @@ public class TwitterOAuthActivity extends android.app.Activity {
     private String mCallbackURL;
     private Twitter mTwitter;
     private RequestToken mRequestToken;
+	private int mUseAccountNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_oauth);
 
-        mCallbackURL = getString(R.string.twitter_callback_url);
-        mTwitter = TwitterUtils.getTwitterInstance(this);
+	    Intent i = getIntent();
 
-        findViewById(R.id.action_start_oauth).setOnClickListener(new View.OnClickListener() {
+	    mCallbackURL = getString(R.string.twitter_callback_url);
+	    mUseAccountNumber = i.getIntExtra("useAccountNumber", 1);
+	    if(mUseAccountNumber == 1) {
+		    mTwitter = TwitterUtils.getTwitterInstance(this);
+	    } else {
+		    mTwitter = TwitterUtils.getTwitterInstance(mUseAccountNumber);
+	    }
+
+	    findViewById(R.id.action_start_oauth).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startAuthorize();
@@ -41,16 +49,12 @@ public class TwitterOAuthActivity extends android.app.Activity {
         });
     }
 
-    /**
-     * OAuth認証（厳密には認可）を開始します。
-     *
-     * @param listener
-     */
     private void startAuthorize() {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
                 try {
+	                //mRequestToken = TwitterFactory.getSingleton() .getOAuthRequestToken(mCallbackURL);
                     mRequestToken = mTwitter.getOAuthRequestToken(mCallbackURL);
                     return mRequestToken.getAuthorizationURL();
                 } catch (TwitterException e) {
@@ -108,7 +112,9 @@ public class TwitterOAuthActivity extends android.app.Activity {
     }
 
     private void successOAuth(AccessToken accessToken) {
-        TwitterUtils.storeAccessToken(this, accessToken);
+        //TwitterUtils.storeAccessToken(this, accessToken);
+	    //管理番号付加版の処理
+	    TwitterUtils.storeAccessToken2(this, accessToken, mUseAccountNumber);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

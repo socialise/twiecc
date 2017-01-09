@@ -3,6 +3,7 @@ package com.dai1pan.Base;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dai1pan.R;
@@ -52,6 +53,8 @@ public class TwitterUtils {
         return twitter;
     }
 
+
+
 	public static Twitter getTwitterInstance(){
 		Context context = ApplicationController.getInstance();
 
@@ -80,6 +83,37 @@ public class TwitterUtils {
 		return twitter;
 	}
 
+	//管理番号ある版
+	public static Twitter getTwitterInstance(int useNumber){
+		Context context = ApplicationController.getInstance();
+
+		String consumerKey = context.getString(R.string.twitter_consumer_key);
+		String consumerSecret = context.getString(R.string.twitter_consumer_secret);
+
+		SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
+				Context.MODE_PRIVATE);
+		String token = preferences.getString(TOKEN, null);
+		String tokenSecret = preferences.getString(TOKEN_SECRET, null);
+
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true)
+				.setOAuthConsumerKey(consumerKey)
+				.setOAuthConsumerSecret(consumerSecret)
+				.setOAuthAccessToken(token)
+				.setOAuthAccessTokenSecret(tokenSecret);
+		TwitterFactory factory = new TwitterFactory(cb.build());
+		Twitter twitter = factory.getInstance();
+
+		if (hasAccessToken(context, useNumber)) {
+			Log.v("getTwitterInstance", "hasAccessToken:true");
+			twitter.setOAuthAccessToken(loadAccessToken(context, useNumber));
+		} else {
+			Log.v("getTwitterInstance", "hasAccessToken:false");
+			Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
+		}
+		return twitter;
+	}
+
     /**
      * アクセストークンをプリファレンスに保存します。
      *
@@ -94,6 +128,20 @@ public class TwitterUtils {
         editor.putString(TOKEN_SECRET, accessToken.getTokenSecret());
         editor.commit();
     }
+
+	//新生アクセストークンをプリファレンスに保存処理
+	public static void storeAccessToken2(Context context, AccessToken accessToken, int useNumber) {
+		SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
+				Context.MODE_PRIVATE);
+		Editor editor = preferences.edit();
+		//プリファレンスへ保存する際、管理番号を付加する
+		editor.putString(TOKEN, accessToken.getToken());
+		editor.putString(TOKEN_SECRET, accessToken.getTokenSecret());
+		editor.putString(TOKEN + useNumber, accessToken.getToken());
+		editor.putString(TOKEN_SECRET + useNumber, accessToken.getTokenSecret());
+		editor.commit();
+	}
+
 
     /**
      * アクセストークンをプリファレンスから読み込みます。
@@ -113,6 +161,24 @@ public class TwitterUtils {
         }
     }
 
+	//アカウント管理番号を追加した処理
+	public static AccessToken loadAccessToken(Context context, int useNumber) {
+		SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
+				Context.MODE_PRIVATE);
+		Log.v("token確認", TOKEN + useNumber);
+		String token = preferences.getString(TOKEN + useNumber, null);
+		String tokenSecret = preferences.getString(TOKEN_SECRET + useNumber, null);
+		Log.v("token確認2", token + ":" + tokenSecret);
+		if (token != null && tokenSecret != null) {
+			//Log.v("token確認2", token + ":" + tokenSecret);
+			return new AccessToken(token, tokenSecret);
+		} else {
+			Log.v("if結果", "ぬるでした");
+			return null;
+		}
+	}
+
+
     /**
      * アクセストークンが存在する場合はtrueを返します。
      *
@@ -121,4 +187,12 @@ public class TwitterUtils {
     public static boolean hasAccessToken(Context context) {
         return loadAccessToken(context) != null;
     }
+
+	//管理追加版
+	public static boolean hasAccessToken(Context context, int useNumber) {
+
+		boolean result = loadAccessToken(context, useNumber) != null;
+		Log.v("hasAccessToken result：", "" + result);
+		return result;
+	}
 }

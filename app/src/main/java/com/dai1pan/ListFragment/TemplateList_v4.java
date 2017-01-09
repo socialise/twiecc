@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.Function.DeleteTweet;
 import com.dai1pan.R;
-import com.dai1pan.test;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -76,7 +75,7 @@ public abstract class TemplateList_v4
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		//TODO クリックした時の動作処理記述
-
+		Toast.makeText(getContext(),"おされた",Toast.LENGTH_SHORT).show();
 		Status status = (Status) v.getTag();
 		new AlertDialog.Builder( getActivity() )
 				.setTitle(status.getUser().getName() + "さんのツイート")
@@ -113,7 +112,6 @@ public abstract class TemplateList_v4
 				deleteBtn.setOnClickListener(new View.OnClickListener(){
 					@Override
 					public void onClick(final View v) {
-
 						//region ダイアログの作成→承認→削除
 						new AlertDialog.Builder(getActivity())
 								//.setMessage("ツイートを削除しますか？")
@@ -122,10 +120,9 @@ public abstract class TemplateList_v4
 								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										//TODO 削除処理
+
 										new Thread( new DeleteTweet((long)v.getTag()) )
 												.start();
-
 
 										//削除後、読み込みが早すぎると、TLに削除済みツイートが表示されるため
 										//ディレイを掛ける(設定時間は要検討)
@@ -136,7 +133,6 @@ public abstract class TemplateList_v4
 										}
 
 										loadTweets(); //TL再読込
-
 									}
 								})
 								.show();
@@ -153,10 +149,10 @@ public abstract class TemplateList_v4
 			final User user  = item.getUser();
 
 			TextView name = (TextView) convertView.findViewById(R.id.name);
-			name.setText(item.getUser().getName());
+			name.setText(user.getName());
 
 			TextView screenName = (TextView) convertView.findViewById(R.id.screen_name);
-			screenName.setText("@" + item.getUser().getScreenName());
+			screenName.setText("@" + user.getScreenName());
 
 			TextView text = (TextView) convertView.findViewById(R.id.text);
 			text.setText(item.getText());
@@ -165,7 +161,9 @@ public abstract class TemplateList_v4
 			icon.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getContext(), test.class);
+					Intent intent = new Intent(getContext(), SomebodyAdministrator.class);
+					intent.putExtra("userID", user.getId());
+					//TODO intentにパラメータをセットする
 					startActivity(intent);
 				}
 			});

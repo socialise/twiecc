@@ -1,5 +1,6 @@
 package com.dai1pan;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,7 +22,6 @@ import android.view.View;
 
 import com.dai1pan.Base.TwitterOAuthActivity;
 import com.dai1pan.Base.TwitterUtils;
-import com.dai1pan.ListFragment.MyTweetFragment;
 import com.dai1pan.ListFragment.TimeLineFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,9 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //認証トークスを得てなかった場合は認証用のアクティビティに遷移する
+        //認証トークンを得てなかった場合は認証用のアクティビティに遷移する
         if (!TwitterUtils.hasAccessToken(this)) {
             Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
+	        //アカウント管理テスト
+	        //初回起動時(認証トークンを一つも得ていない場合はアカウント1番への登録として
+	        //認証アクティビティへ飛ばす
+	        intent.putExtra("useAccountNumber", 1);
             startActivity(intent);
             finish();
         }else{
@@ -69,11 +74,76 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze_white);
 
+	    AlertDialog.Builder mListDlg;
+
         //NavigationDrawer
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+//	            String itemId;
+	            switch (menuItem.getItemId()){
+
+		            case R.id.navigation_item_account :
+			            final CharSequence[] items = {"新規アカウント", "新規アカウント", "新規アカウント"};
+			            AlertDialog.Builder listDlg = new AlertDialog.Builder(MainActivity.this);
+			            listDlg.setTitle("アカウント切替");
+			            listDlg.setItems(
+					            items,
+					            new DialogInterface.OnClickListener() {
+						            public void onClick(DialogInterface dialog, int which) {
+							            // リスト選択時の処理
+							            // which は、選択されたアイテムのインデックス
+
+							            switch (which){
+								            case 0:
+									            //選択したアカウント番号が認証済みが確認
+									            if (!TwitterUtils.hasAccessToken(MainActivity.this, 1)) {
+										            Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
+										            //アカウント管理テスト
+										            //初回起動時(認証トークンを一つも得ていない場合はアカウント1番への登録として
+										            //認証アクティビティへ飛ばす
+										            intent.putExtra("useAccountNumber", 1);
+										            startActivity(intent);
+										            finish();
+									            }
+									            break;
+
+								            case 1:
+									            if (!TwitterUtils.hasAccessToken(MainActivity.this, 2)) {
+										            Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
+										            //アカウント管理テスト
+										            //初回起動時(認証トークンを一つも得ていない場合はアカウント1番への登録として
+										            //認証アクティビティへ飛ばす
+										            intent.putExtra("useAccountNumber", 2);
+										            startActivity(intent);
+										            finish();
+									            }
+									            break;
+
+								            case 2:
+									            if (!TwitterUtils.hasAccessToken(MainActivity.this, 3)) {
+										            Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
+										            //アカウント管理テスト
+										            //初回起動時(認証トークンを一つも得ていない場合はアカウント1番への登録として
+										            //認証アクティビティへ飛ばす
+										            intent.putExtra("useAccountNumber", 3);
+										            startActivity(intent);
+										            finish();
+									            }
+									            break;
+
+							            }
+
+						            }
+					            });
+
+			            // 表示
+			            listDlg.create().show();
+
+
+	            }
+
                 menuItem.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 return true;
@@ -119,9 +189,6 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     fragment = new MyProfileFragment();
                     break;
-	            case 3:
-		            fragment = SpecificTweetsFragment.newInstance(2407902008L);
-		            break;
                 default:
                     fragment = new Fragment();
             }
