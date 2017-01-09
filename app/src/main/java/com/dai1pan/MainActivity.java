@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 1:
 	                Log.v(getClass().getName(), "フラグメント作成");
-	                fragment = new MyTweetFragment();
+	                fragment = new MyInfoRootFragment();
                     break;
                 case 2:
                     fragment = new MyProfileFragment();
