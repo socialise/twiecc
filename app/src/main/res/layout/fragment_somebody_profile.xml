@@ -28,17 +28,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!--フォロー数-->
     <TextView
         android:id="@+id/followText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <!--フォロワー数-->
     <TextView
         android:id="@+id/followerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-
-
+    <!--フォローボタン-->
+    <Button
+        android:id="@+id/FollowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="フォロー" />
 
 </LinearLayout>
