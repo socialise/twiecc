@@ -26,6 +26,8 @@ import com.dai1pan.Base.TwitterOAuthActivity;
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.ListFragment.TimeLineFragment;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
 	private DrawerLayout mDrawerLayout;
@@ -33,14 +35,21 @@ public class MainActivity extends AppCompatActivity {
 	private static final String PREF_NAME = "twitter_access_token";
 	private static final String SELECT = "number";
 	private static final String ACCOUNT_NAME = "account";
+	private static final String LAST_USE = "last_use";
+	public static final ArrayList<Long> deleteArray = new ArrayList<>();
+
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		//認証前にアプリ終了時に使用していたアカウントを確認
+		Intent i = new Intent(MainActivity.this, TwitterOAuthActivity.class);
+		int lastUse = i.getIntExtra(LAST_USE, 1);
+
 		//認証トークンを得てなかった場合は認証用のアクティビティに遷移する
-		if (!TwitterUtils.hasAccessToken(this)) {
+		if (!TwitterUtils.hasAccessToken(this, lastUse)) {
 			Intent intent = new Intent(MainActivity.this, TwitterOAuthActivity.class);
 			//アカウント管理テスト
 			//初回起動時(認証トークンを一つも得ていない場合はアカウント1番への登録として
@@ -94,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
 						SharedPreferences preferences = MainActivity.this.getSharedPreferences(PREF_NAME,
 								Context.MODE_PRIVATE);
 
-						final CharSequence[] items = {preferences.getString(ACCOUNT_NAME + 1,"test"), preferences.getString(ACCOUNT_NAME + 2,"test"), "新規アカウント"};
+						final CharSequence[] items = {preferences.getString(ACCOUNT_NAME + 1,"test"),
+								preferences.getString(ACCOUNT_NAME + 2,"test"),
+								preferences.getString(ACCOUNT_NAME + 3,"test")};
 						AlertDialog.Builder listDlg = new AlertDialog.Builder(MainActivity.this);
 						listDlg.setTitle("アカウント切替");
 						listDlg.setItems(

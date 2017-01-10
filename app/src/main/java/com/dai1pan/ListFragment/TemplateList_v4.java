@@ -11,15 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterUtils;
 import com.dai1pan.Function.DeleteTweet;
+import com.dai1pan.MainActivity;
 import com.dai1pan.R;
 import com.loopj.android.image.SmartImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Status;
@@ -87,27 +91,56 @@ public abstract class TemplateList_v4
 	protected class TweetAdapter extends ArrayAdapter<Status> {
 
 		private LayoutInflater mInflater;
+		private ArrayList<Integer> checked;
 
 		public TweetAdapter(Context context) {
 			super(context, android.R.layout.simple_list_item_1);
 			mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			checked = new ArrayList<>();
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.list_item_tweet, null);
 			}
 
 			Status item = getItem(position);
 
-
-//			parent.removeViewAt(position);
-
 			//削除ボタンの記述
 			View deleteBtn = convertView.findViewById(R.id.deleteButton);
+			final CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+
 			if (item.getUser().getId() == mUserId) {
 				deleteBtn.setTag(item.getId()); //削除ボタンのタグにツイートIDを格納(long型)
+				checkBox.setTag(item.getId()); //チェックボックスのタグにもツイートIDを格納(long型)
+
+				//以下はチェックボックス関連の処理
+				checkBox.setOnCheckedChangeListener(null);
+				checkBox.setChecked(false);
+				if (checked.contains(position)) {
+					checkBox.setChecked(true);
+				}
+				checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						//チェックしたツイートを削除リストに登録
+						if (isChecked) {
+							checked.add(position);
+							MainActivity.deleteArray.add((Long)checkBox.getTag());
+						} else {
+							checked.remove(position);
+						}
+					}
+				});
+
+				checkBox.setVisibility(View.VISIBLE);
+				deleteBtn.setVisibility(View.VISIBLE);
+			} else {
+				deleteBtn.setVisibility(View.INVISIBLE);
+				checkBox.setVisibility(View.INVISIBLE);
+			}
+
 
 				deleteBtn.setOnClickListener(new View.OnClickListener(){
 					@Override
@@ -140,10 +173,6 @@ public abstract class TemplateList_v4
 					}
 				});
 
-				deleteBtn.setVisibility(View.VISIBLE);
-			} else {
-				deleteBtn.setVisibility(View.INVISIBLE);
-			}
 
 			//細かなツイート表示
 			final User user  = item.getUser();

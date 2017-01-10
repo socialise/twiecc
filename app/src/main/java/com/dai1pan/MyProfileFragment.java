@@ -1,17 +1,22 @@
 package com.dai1pan;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.Function.DeleteTweet;
 import com.loopj.android.image.SmartImageView;
 
 import twitter4j.Twitter;
@@ -43,6 +48,7 @@ public class MyProfileFragment extends Fragment {
 	private SmartImageView mImageProfile;
 	private TextView mTextFollw;
 	private TextView mTextFollower;
+	private Button mMultiDeleteButton;
 
 	private OnFragmentInteractionListener mListener;
 
@@ -75,6 +81,7 @@ public class MyProfileFragment extends Fragment {
 			mParam1 = getArguments().getString(ARG_PARAM1);
 			mParam2 = getArguments().getString(ARG_PARAM2);
 		}
+
 	}
 
 	@Override
@@ -91,27 +98,73 @@ public class MyProfileFragment extends Fragment {
 		mTextFollw = (TextView) v.findViewById(R.id.followText);
 		mTextFollower = (TextView) v.findViewById(R.id.followerText);
 
-//		Toast.makeText(
-//
-//				getContext(),
-//
-//				this.
-//
-//						getClass()
-//
-//						.
-//
-//								getName()
-//
-//						.
-//
-//								toString(), Toast
-//
-//						.LENGTH_SHORT).
-//
-//				show();
+		mMultiDeleteButton = (Button)v.findViewById(R.id.multiDeleteButton);
 
-		//自分のユーザIDを取得して引数に渡す
+		//ツイートの複数削除用ボタン処理
+		mMultiDeleteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//アラートダイアログ部分の処理
+				new AlertDialog.Builder(getActivity())
+						.setMessage("選択したツイートを削除しますか？")
+						.setNegativeButton("キャンセル", null)
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+							//ダイアログ[OK]ボタンクリック時の処理(一括削除)
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+
+								Thread thread = new Thread(new Runnable() {
+									@Override
+									public void run() {
+										for(int i = 0;i < MainActivity.deleteArray.size();i++){
+											new DeleteTweet(MainActivity.deleteArray.get(i)).run();
+										}
+
+									}
+								});
+								thread.start();
+								try {
+									Thread.sleep(200);
+
+									Intent intent = new Intent(getContext(), MainActivity.class);
+									startActivity(intent);
+
+
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+
+
+							}
+						})
+						.show();
+
+
+
+
+//				Thread thread = new Thread(new Runnable() {
+//					@Override
+//					public void run() {
+//						for(int i = 0;i < MainActivity.deleteArray.size();i++){
+//							new DeleteTweet(MainActivity.deleteArray.get(i)).run();
+//						}
+//
+//					}
+//				});
+//				thread.start();
+//				try {
+//					Thread.sleep(200);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+
+
+
+			}
+		});
+
+				//自分のユーザIDを取得して引数に渡す
 		final Handler handler = new Handler();
 		Runnable run = new Runnable() {
 			@Override

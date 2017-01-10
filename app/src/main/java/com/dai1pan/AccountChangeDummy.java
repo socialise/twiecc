@@ -21,6 +21,7 @@ public class AccountChangeDummy extends AppCompatActivity {
 	private static final String PREF_NAME = "twitter_access_token";
 	private static final String SELECT = "number";
 	private static final String ACCOUNT_NAME = "account";
+	private static final String LAST_USE = "last_use";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class AccountChangeDummy extends AppCompatActivity {
 					editor.putString(TOKEN, token);
 					editor.putString(TOKEN_SECRET, tokenSecret);
 					editor.putString(ACCOUNT_NAME + use, user.getScreenName());
+					editor.putInt(LAST_USE, use);
 					editor.commit();
 
 					Intent intent = new Intent(AccountChangeDummy.this, MainActivity.class);
@@ -61,32 +63,7 @@ public class AccountChangeDummy extends AppCompatActivity {
 		Thread otherThr = new Thread(run);
 		otherThr.start();
 
-//		try{
-//			SharedPreferences preferences = AccountChangeDummy.this.getSharedPreferences(PREF_NAME,
-//					Context.MODE_PRIVATE);
-//
-//			int use = preferences.getInt(SELECT, 1);
-//			final Twitter twitter = TwitterUtils.getTwitterInstance(use);
-//			final User user;
-//			long a = twitter.getId();
-//			user = twitter.showUser(a);
-//
-//			//読み込み処理
-//			String token = preferences.getString(TOKEN + use, null);
-//			String tokenSecret = preferences.getString(TOKEN_SECRET + use, null);
-//
-//			//書き込み
-//			SharedPreferences.Editor editor = preferences.edit();
-//			editor.putString(TOKEN, token);
-//			editor.putString(TOKEN_SECRET, tokenSecret);
-//			//editor.putString(ACCOUNT_NAME + use, user.getScreenName());
-//			editor.commit();
-//
-//			Intent intent = new Intent(this, MainActivity.class);
-//			startActivity(intent);
-//
-//		}catch (TwitterException e) {
-//		}
+
 
 
 
@@ -94,19 +71,4 @@ public class AccountChangeDummy extends AppCompatActivity {
 	}
 
 
-
-	//使用する認証をプリファレンスから読み込む
-//	public static AccessToken loadAccessToken(Context context, int useNumber) {
-//		SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
-//				Context.MODE_PRIVATE);
-//
-//		String token = preferences.getString(TOKEN + useNumber, null);
-//		String tokenSecret = preferences.getString(TOKEN_SECRET + useNumber, null);
-//
-//		if (token != null && tokenSecret != null) {
-//			return new AccessToken(token, tokenSecret);
-//		} else {
-//			return null;
-//		}
-//	}
 }
