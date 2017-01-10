@@ -87,6 +87,7 @@ public class MainFragmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainFragmentActivity.this, WriteTweetActivity.class);
+                //Intent intent = new Intent(MainFragmentActivity.this, LikeListActivity.class);
                 startActivity(intent);
             }
         });
