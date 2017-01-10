@@ -43,6 +43,8 @@
         </activity>
         <activity android:name=".ListFragment.SomebodyAdministrator">
         </activity>
+        <activity android:name=".AccountChangeDummy">
+        </activity>
     </application>
 
 </manifest>

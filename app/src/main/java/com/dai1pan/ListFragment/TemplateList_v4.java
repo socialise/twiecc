@@ -51,7 +51,7 @@ public abstract class TemplateList_v4
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//認証トークスを得てなかった場合は認証用のアクティビティに遷移する
+		//認証トークンを得てなかった場合は認証用のアクティビティに遷移する
 		if (TwitterUtils.hasAccessToken(getActivity())) {
 			//認証が済んでいる場合の処理
 			mAdapter = new TweetAdapter(getActivity());

@@ -18,6 +18,7 @@ public class TwitterUtils {
     private static final String TOKEN = "token";
     private static final String TOKEN_SECRET = "token_secret";
     private static final String PREF_NAME = "twitter_access_token";
+	private static final String ACCOUNT_NAME = "account";
 
     /**
      * Twitterインスタンスを取得します。アクセストークンが保存されていれば自動的にセットします。
@@ -92,8 +93,8 @@ public class TwitterUtils {
 
 		SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
 				Context.MODE_PRIVATE);
-		String token = preferences.getString(TOKEN, null);
-		String tokenSecret = preferences.getString(TOKEN_SECRET, null);
+		String token = preferences.getString(TOKEN + useNumber, null);
+		String tokenSecret = preferences.getString(TOKEN_SECRET + useNumber, null);
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
@@ -139,6 +140,7 @@ public class TwitterUtils {
 		editor.putString(TOKEN_SECRET, accessToken.getTokenSecret());
 		editor.putString(TOKEN + useNumber, accessToken.getToken());
 		editor.putString(TOKEN_SECRET + useNumber, accessToken.getTokenSecret());
+//		editor.putString(ACCOUNT_NAME + useNumber, "");
 		editor.commit();
 	}
 
