@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.dai1pan.SomebodyProfileFragment;
+
 /**
  * IE3A11　下村怜大
  */
@@ -17,5 +19,7 @@ public class FollowActivity {
 
     _tw.createFriendship(["ユーザー名"orユーザーID]);
     _tw.destroyFriendship(["ユーザー名"orユーザーID]);
+
+    public
 
 }
