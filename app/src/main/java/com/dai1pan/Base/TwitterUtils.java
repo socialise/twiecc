@@ -30,31 +30,32 @@ public class TwitterUtils {
      * @return
      */
     public static Twitter getTwitterInstance(Context context) {
-        String consumerKey = context.getString(R.string.twitter_consumer_key);
-        String consumerSecret = context.getString(R.string.twitter_consumer_secret);
-
-        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
-                Context.MODE_PRIVATE);
-        String token = preferences.getString(TOKEN, null);
-        String tokenSecret = preferences.getString(TOKEN_SECRET, null);
-
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-                .setOAuthConsumerKey(consumerKey)
-                .setOAuthConsumerSecret(consumerSecret)
-                .setOAuthAccessToken(token)
-                .setOAuthAccessTokenSecret(tokenSecret);
-
-        TwitterFactory factory = new TwitterFactory(cb.build());
-        Twitter twitter = factory.getInstance();
-//        twitter.setOAuthConsumer(consumerKey, consumerSecret);
-
-        if (hasAccessToken(context)) {
-//            twitter.setOAuthAccessToken(loadAccessToken(context));
-        } else {
-            Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
-        }
-        return twitter;
+//        String consumerKey = context.getString(R.string.twitter_consumer_key);
+//        String consumerSecret = context.getString(R.string.twitter_consumer_secret);
+//
+//        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
+//                Context.MODE_PRIVATE);
+//        String token = preferences.getString(TOKEN, null);
+//        String tokenSecret = preferences.getString(TOKEN_SECRET, null);
+//
+//        ConfigurationBuilder cb = new ConfigurationBuilder();
+//        cb.setDebugEnabled(true)
+//                .setOAuthConsumerKey(consumerKey)
+//                .setOAuthConsumerSecret(consumerSecret)
+//                .setOAuthAccessToken(token)
+//                .setOAuthAccessTokenSecret(tokenSecret);
+//
+//        TwitterFactory factory = new TwitterFactory(cb.build());
+//        Twitter twitter = factory.getInstance();
+////        twitter.setOAuthConsumer(consumerKey, consumerSecret);
+//
+//        if (hasAccessToken(context)) {
+////            twitter.setOAuthAccessToken(loadAccessToken(context));
+//        } else {
+//            Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
+//        }
+//        return twitter;
+        return getTwitterInstance();
     }
 
 
@@ -83,6 +84,7 @@ public class TwitterUtils {
         } else {
             Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
         }
+        context = null;
         return twitter;
     }
 
