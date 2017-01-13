@@ -3,10 +3,10 @@ package com.dai1pan;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.dai1pan.Base.TwitterUtils;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -39,7 +39,6 @@ public class WriteTweetActivity extends AppCompatActivity {
                             Status status = null;
                             status = twitter.updateStatus(editText.getText().toString());
                         } catch (TwitterException e) {
-                            // TODO 自動生成された catch ブロック
                             e.printStackTrace();
                         }
                     }

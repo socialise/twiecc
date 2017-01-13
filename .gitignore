@@ -22,6 +22,7 @@ proguard/
 app/build/
 
 .idea/*.xml
+.idea/.name
 
-!.idea/gradle.xml
+#!.idea/gradle.xml
 !.idea/runConfigurations/*.xml
