@@ -173,6 +173,7 @@ public class MyProfileFragment extends Fragment {
 					Log.v("TEST","run");
 					final Twitter twitter = TwitterUtils.getTwitterInstance(getContext());
 					final User user;
+
 //					final User userYotti = twitter.showUser("@yothio317"); //よっちid取得用
 					//twitter.showUser(twitter.getId());
 					long a = twitter.getId();

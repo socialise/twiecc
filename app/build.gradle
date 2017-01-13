@@ -24,6 +24,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile files('libs/android-smart-image-view.jar')
+
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'org.twitter4j:twitter4j-core:4.+'
     compile 'com.android.support:design:23.3.0'
