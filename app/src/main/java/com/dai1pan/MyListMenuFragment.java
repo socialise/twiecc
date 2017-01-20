@@ -47,7 +47,8 @@ public class MyListMenuFragment extends TemplateList_v4 {
 
         final Twitter twitter = TwitterUtils.getTwitterInstance(getContext());
         try {
-            mList = twitter.getUserLists("@sakai_ie");
+            // 鍵垢のひとだとmListがnullになるので、公開垢を指定する
+            mList = twitter.getUserLists("@TECHNOTAK");
         } catch (TwitterException e) {
             e.printStackTrace();
         }
