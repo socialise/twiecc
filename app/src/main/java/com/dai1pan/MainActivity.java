@@ -249,12 +249,12 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new FavoriteTweetsFragment();
                     break;
                 case 3:
-//                    fragment = new DispFriendsFragment();
+                    fragment = new DispFriendsFragment();
+//                    fragment = new RemoveCheckFragment();
+                    break;
+                case 4:
                     fragment = new RemoveCheckFragment();
                     break;
-//                case 4:
-//                    fragment = new RemoveCheckFragment();
-//                    break;
 
                 default:
                     fragment = new Fragment();
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
 
         @Override
