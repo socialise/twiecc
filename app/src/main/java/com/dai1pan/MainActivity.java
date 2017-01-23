@@ -28,9 +28,11 @@ import android.widget.Toast;
 
 import com.dai1pan.Base.TwitterOAuthActivity;
 import com.dai1pan.Base.TwitterUtils;
+import com.dai1pan.ListFragment.DispFriendsFragment;
 import com.dai1pan.ListFragment.LikeListFragment;
 import com.dai1pan.Datebase.MyHelper;
 import com.dai1pan.ListFragment.FavoriteTweetsFragment;
+import com.dai1pan.ListFragment.RemoveCheckFragment;
 import com.dai1pan.ListFragment.TimeLineFragment;
 
 import java.util.ArrayList;
@@ -48,11 +50,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String SQL_SELECT = "select _id, Favorite_Status_ID from t_id";
     public static Cursor DBCursor; //DBからの情報読込用カーソル
     public static android.os.Handler mHandler;
+    public static final String SERVICE_TEST_MSG = "使えてまっせ";
+    private boolean mServiceFlg = false; //認証が済んでいるか管理してサービスを動かす
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //stopService(new Intent(MainActivity.this, TestService.class));
 
         mHandler = new android.os.Handler();
 
@@ -71,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         } else {
             //認証が成功したとき
+            mServiceFlg = true;
             findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -178,6 +184,13 @@ public class MainActivity extends AppCompatActivity {
 
                         // 表示
                         listDlg.create().show();
+                        break;
+
+                    case R.id.navigation_item_interval :
+                        //[定期ツイート設定]を選択時の処理
+                        Intent intent = new Intent(MainActivity.this, MakeIntervalTweetActivity.class);
+                        startActivity(intent);
+//                        break;
 
 
                 }
@@ -194,6 +207,15 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(mServiceFlg){
+            //startService( new Intent( MainActivity.this, TestService.class ) );
+        }
+        super.onDestroy();
+
     }
 
     @Override
@@ -227,8 +249,13 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new FavoriteTweetsFragment();
                     break;
                 case 3:
-                    fragment = new MyListMenuFragment();
+//                    fragment = new DispFriendsFragment();
+                    fragment = new RemoveCheckFragment();
                     break;
+//                case 4:
+//                    fragment = new RemoveCheckFragment();
+//                    break;
+
                 default:
                     fragment = new Fragment();
             }

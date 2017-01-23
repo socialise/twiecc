@@ -10,7 +10,7 @@
     <!--ID表示用-->
     <TextView
         android:id="@+id/idText"
-        android:layout_width="237dp"
+        android:layout_width="152dp"
         android:layout_height="40dp"
         android:text="境の馬鹿"
         android:layout_marginTop="28dp"
@@ -47,7 +47,7 @@
     <!--プロフ文章-->
     <TextView
         android:id="@+id/profileText"
-        android:layout_width="match_parent"
+        android:layout_width="247dp"
         android:layout_height="120dp"
         android:text="ESES"
         android:layout_marginLeft="99dp"
@@ -88,7 +88,17 @@
         android:id="@+id/multiDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="一括削除"/>
+        android:text="一括削除"
+        android:layout_x="177dp"
+        android:layout_y="3dp" />
+
+    <!--<Button-->
+        <!--android:id="@+id/followButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="フォローする"-->
+        <!--android:layout_x="16dp"-->
+        <!--android:layout_y="209dp" />-->
 
 
 

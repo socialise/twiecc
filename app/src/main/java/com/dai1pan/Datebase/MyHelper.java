@@ -14,9 +14,14 @@ public class MyHelper extends SQLiteOpenHelper {
 	//id列が存在しているのを前提にしているクラスがあるので、
 	//それらのクラスを使用するときには下記の文を入れる
 	//_id integer primary key autoincrement
-	private String createTableSQL = "CREATE TABLE t_id(" +
+	private String createFavoriteTableSQL = "CREATE TABLE t_id(" +
 			"_id INTEGER primary key autoincrement, " +
 			"Favorite_Status_ID TEXT" +
+			");";
+
+	private String createRemoveTableSQL = "CREATE TABLE t_r_id(" +
+			"_id INTEGER primary key autoincrement, " +
+			"Save_User_ID TEXT" +
 			");";
 
 	public MyHelper(Context context) {
@@ -26,7 +31,8 @@ public class MyHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO 自動生成されたメソッド・スタブ
-        db.execSQL(createTableSQL);
+        db.execSQL(createFavoriteTableSQL);
+		db.execSQL(createRemoveTableSQL);
 	}
 
 	@Override
