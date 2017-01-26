@@ -2,6 +2,7 @@ package com.dai1pan.ListFragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -62,6 +63,7 @@ public class DispFriendsFragment extends Fragment {
         Runnable run = new Runnable() {
             @Override
             public void run() {
+                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 
                 while (mRunFlg){
 
@@ -116,9 +118,10 @@ public class DispFriendsFragment extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
                         mHandler.post(new Runnable() {
                             public void run() {
-
+                                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
                                 //ヌルポ対策
                                 try{
                                     //リニアレイアウト水平----/水平A:Bで管理

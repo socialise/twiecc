@@ -1,5 +1,7 @@
 package com.dai1pan.Function;
 
+import android.util.Log;
+
 import com.dai1pan.Base.TwitterUtils;
 
 import twitter4j.*;
@@ -28,6 +30,7 @@ public class DeleteTweet implements Runnable{
 
 	@Override
 	public void run() {
+		Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 
 		delete(id);
 

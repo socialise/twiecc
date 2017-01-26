@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.dai1pan.Base.TwitterUtils;
 
@@ -29,7 +30,7 @@ public class AccountChangeDummy extends AppCompatActivity {
 
 		Runnable run = new Runnable() {
 			public void run() {
-
+				Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 				try{
 					SharedPreferences preferences = AccountChangeDummy.this.getSharedPreferences(PREF_NAME,
 							Context.MODE_PRIVATE);

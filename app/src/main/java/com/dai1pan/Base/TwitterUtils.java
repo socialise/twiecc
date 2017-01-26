@@ -139,6 +139,7 @@ public class TwitterUtils {
 
         Runnable run = new Runnable() {
             public void run() {
+                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 
                 long a = 0;
                 try {

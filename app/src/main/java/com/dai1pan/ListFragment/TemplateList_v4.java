@@ -370,6 +370,7 @@ public abstract class TemplateList_v4
                     MainActivity.mHandler.post(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
                             if (getContext() != null)
                                 //Toast.makeText(getContext(), "リミット超えました", Toast.LENGTH_LONG).show();
                             Log.v("りみっとこえた", "limit exceeded");

@@ -91,6 +91,7 @@ public class TestService extends Service {
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
+                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 //                Log.d("クラスの静的定数利用テスト:", MainActivity.SERVICE_TEST_MSG);
 //                mNum = mRnd.nextInt(11);
 //                Log.d("乱数結果:", "" + mNum);

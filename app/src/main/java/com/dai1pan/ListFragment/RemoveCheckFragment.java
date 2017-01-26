@@ -72,6 +72,7 @@ public class RemoveCheckFragment extends Fragment {
         Runnable run = new Runnable() {
             @Override
             public void run() {
+                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
                 while(mRunFlg){
 
                     try {
@@ -212,6 +213,7 @@ public class RemoveCheckFragment extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
                         mHandler.post(new Runnable() {
                             public void run() {
 
@@ -296,6 +298,7 @@ public class RemoveCheckFragment extends Fragment {
         Runnable run = new Runnable() {
             @Override
             public void run() {
+                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 
                 for (int i = 0; i < mSaveFollowersIDs.size(); i++) {
                     try {
@@ -306,6 +309,7 @@ public class RemoveCheckFragment extends Fragment {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
+                                Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
                                 mHandler.post(new Runnable() {
                                     public void run() {
 

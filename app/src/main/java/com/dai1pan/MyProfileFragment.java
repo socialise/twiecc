@@ -117,6 +117,7 @@ public class MyProfileFragment extends Fragment {
 								Thread thread = new Thread(new Runnable() {
 									@Override
 									public void run() {
+										Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 										for(int i = 0;i < MainActivity.deleteArray.size();i++){
 											new DeleteTweet(MainActivity.deleteArray.get(i)).run();
 										}
@@ -169,6 +170,7 @@ public class MyProfileFragment extends Fragment {
 		Runnable run = new Runnable() {
 			@Override
 			public void run() {
+				Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 				try {
 					Log.v("TEST","run");
 					final Twitter twitter = TwitterUtils.getTwitterInstance(getContext());
@@ -183,6 +185,7 @@ public class MyProfileFragment extends Fragment {
 					handler.post(new Runnable() {
 						@Override
 						public void run() {
+							Log.d("newThread", new Throwable().getStackTrace()[0].getFileName() + ":" + new Throwable().getStackTrace()[0].getLineNumber());
 							//以下でプロフ表示
 							mTextName.setText(user.getName()); //名前表示,ゆっぺ
 							mTextId.setText(user.getScreenName()); //id表示,sakai_ie
