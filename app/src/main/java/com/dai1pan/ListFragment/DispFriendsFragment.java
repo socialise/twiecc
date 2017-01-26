@@ -40,6 +40,7 @@ public class DispFriendsFragment extends Fragment {
     private LayoutInflater mInflater;
 
     private final Handler mHandler = new Handler();
+    private boolean mRunFlg = true;
 
 
     @Override
@@ -62,15 +63,31 @@ public class DispFriendsFragment extends Fragment {
             @Override
             public void run() {
 
-                try {
-                    getFriends();
-                    Log.d("フォロー数:", "" + mFriendsIDs.size());
-                    Log.d("相互フォロー数:", "" + mGoodFriendsIDs.size());
-                    setFriendsView();
+                while (mRunFlg){
 
-                } catch (TwitterException e) {
-                    e.printStackTrace();
+                    try {
+                        getFriends();
+                        Log.d("フォロー数:", "" + mFriendsIDs.size());
+                        Log.d("相互フォロー数:", "" + mGoodFriendsIDs.size());
+                        setFriendsView();
+
+                    } catch (TwitterException e) {
+                        e.printStackTrace();
+                    }
+
                 }
+
+
+
+//                try {
+//                    getFriends();
+//                    Log.d("フォロー数:", "" + mFriendsIDs.size());
+//                    Log.d("相互フォロー数:", "" + mGoodFriendsIDs.size());
+//                    setFriendsView();
+//
+//                } catch (TwitterException e) {
+//                    e.printStackTrace();
+//                }
 
             }
         };
@@ -102,36 +119,71 @@ public class DispFriendsFragment extends Fragment {
                         mHandler.post(new Runnable() {
                             public void run() {
 
-                                //リニアレイアウト水平----/水平A:Bで管理
-                                LinearLayout yokoLinear = new LinearLayout(getContext());
-                                yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
+                                //ヌルポ対策
+                                try{
+                                    //リニアレイアウト水平----/水平A:Bで管理
+                                    LinearLayout yokoLinear = new LinearLayout(getContext());
+                                    yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
 
-                                //リニア水平A面の準備(画像のみ)
-                                //プロフ画像用View生成
-                                SmartImageView icon = new SmartImageView(getContext());
+                                    //リニア水平A面の準備(画像のみ)
+                                    //プロフ画像用View生成
+                                    SmartImageView icon = new SmartImageView(getContext());
 //                                    Log.d("ImageURL", "" + mUser.getProfileImageURL());
-                                //プロフ画像URLをmUserから読み込み,リニア水平A面へ追加
-                                icon.setImageUrl(mUser.getProfileImageURL());
-                                yokoLinear.addView(icon);
+                                    //プロフ画像URLをmUserから読み込み,リニア水平A面へ追加
+                                    icon.setImageUrl(mUser.getProfileImageURL());
+                                    yokoLinear.addView(icon);
 
-                                //リニア水平B面の準備(名前,ID,プロフ文章,これらを並べるリニア垂直)
-                                LinearLayout tateLinear = new LinearLayout(getContext());
-                                tateLinear.setOrientation(LinearLayout.VERTICAL);
-                                TextView name = new TextView(getContext()); //名前
-                                TextView screenName = new TextView(getContext()); //ID
-                                TextView description = new TextView(getContext()); //プロフ文章
-                                //各情報をmUserから読み込む
-                                name.setText(mUser.getName());
-                                screenName.setText("@" + mUser.getScreenName());
-                                description.setText(mUser.getDescription());
-                                //各TextViewをリニア垂直に追加し、リニア垂直をリニア水平B面へ追加
-                                tateLinear.addView(name);
-                                tateLinear.addView(screenName);
-                                tateLinear.addView(description);
-                                yokoLinear.addView(tateLinear);
+                                    //リニア水平B面の準備(名前,ID,プロフ文章,これらを並べるリニア垂直)
+                                    LinearLayout tateLinear = new LinearLayout(getContext());
+                                    tateLinear.setOrientation(LinearLayout.VERTICAL);
+                                    TextView name = new TextView(getContext()); //名前
+                                    TextView screenName = new TextView(getContext()); //ID
+                                    TextView description = new TextView(getContext()); //プロフ文章
+                                    //各情報をmUserから読み込む
+                                    name.setText(mUser.getName());
+                                    screenName.setText("@" + mUser.getScreenName());
+                                    description.setText(mUser.getDescription());
+                                    //各TextViewをリニア垂直に追加し、リニア垂直をリニア水平B面へ追加
+                                    tateLinear.addView(name);
+                                    tateLinear.addView(screenName);
+                                    tateLinear.addView(description);
+                                    yokoLinear.addView(tateLinear);
 
-                                //動的ビューを全て取得した水平リニアを親元のリニアへ追加
-                                mLinearLayout.addView(yokoLinear);
+                                    //動的ビューを全て取得した水平リニアを親元のリニアへ追加
+                                    mLinearLayout.addView(yokoLinear);
+                                }catch (NullPointerException e){
+
+                                }
+//                                //リニアレイアウト水平----/水平A:Bで管理
+//                                LinearLayout yokoLinear = new LinearLayout(getContext());
+//                                yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
+//
+//                                //リニア水平A面の準備(画像のみ)
+//                                //プロフ画像用View生成
+//                                SmartImageView icon = new SmartImageView(getContext());
+////                                    Log.d("ImageURL", "" + mUser.getProfileImageURL());
+//                                //プロフ画像URLをmUserから読み込み,リニア水平A面へ追加
+//                                icon.setImageUrl(mUser.getProfileImageURL());
+//                                yokoLinear.addView(icon);
+//
+//                                //リニア水平B面の準備(名前,ID,プロフ文章,これらを並べるリニア垂直)
+//                                LinearLayout tateLinear = new LinearLayout(getContext());
+//                                tateLinear.setOrientation(LinearLayout.VERTICAL);
+//                                TextView name = new TextView(getContext()); //名前
+//                                TextView screenName = new TextView(getContext()); //ID
+//                                TextView description = new TextView(getContext()); //プロフ文章
+//                                //各情報をmUserから読み込む
+//                                name.setText(mUser.getName());
+//                                screenName.setText("@" + mUser.getScreenName());
+//                                description.setText(mUser.getDescription());
+//                                //各TextViewをリニア垂直に追加し、リニア垂直をリニア水平B面へ追加
+//                                tateLinear.addView(name);
+//                                tateLinear.addView(screenName);
+//                                tateLinear.addView(description);
+//                                yokoLinear.addView(tateLinear);
+//
+//                                //動的ビューを全て取得した水平リニアを親元のリニアへ追加
+//                                mLinearLayout.addView(yokoLinear);
 
 
                             }
@@ -146,7 +198,6 @@ public class DispFriendsFragment extends Fragment {
 
 
         }
-
 
 
     }
@@ -208,6 +259,19 @@ public class DispFriendsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        mRunFlg = false;
+        Log.d("テスト", "Destroy通過");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        mRunFlg = false;
+        Log.d("テスト", "Pause通過");
+        super.onPause();
+    }
 
     private static void output(List<Long> ids) {
 

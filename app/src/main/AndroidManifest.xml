@@ -38,6 +38,7 @@
             android:name=".WriteTweetActivity"
             android:label="ツイート書込み"/>
         <activity android:name=".LikeListActivity"/>
+        <activity android:name=".RootIntervalActivity" />
         <activity android:name=".MakeIntervalTweetActivity"/>
         <activity android:name=".SearchActivity"/>
         <activity android:name=".Detail.DetailTweetActivity">

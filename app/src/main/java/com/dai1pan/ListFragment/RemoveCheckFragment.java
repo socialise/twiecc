@@ -48,6 +48,7 @@ public class RemoveCheckFragment extends Fragment {
     private String mSQL;
     public Cursor mCursor; //DBからの情報読込用カーソル
     public static final String SQL_SELECT = "select distinct Save_User_ID from t_r_id";
+    private boolean mRunFlg = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,15 +68,30 @@ public class RemoveCheckFragment extends Fragment {
 
 
 
+
         Runnable run = new Runnable() {
             @Override
             public void run() {
+                while(mRunFlg){
 
-                try {
-                    getFriends();
-                } catch (TwitterException e) {
-                    e.printStackTrace();
+                    try {
+                        try {
+                            getFriends();
+                        }catch (NullPointerException e){
+
+                        }
+//                        getFriends();
+                    } catch (TwitterException e) {
+                        e.printStackTrace();
+                    }
+
                 }
+
+//                try {
+//                    getFriends();
+//                } catch (TwitterException e) {
+//                    e.printStackTrace();
+//                }
 
             }
         };
@@ -199,23 +215,46 @@ public class RemoveCheckFragment extends Fragment {
                         mHandler.post(new Runnable() {
                             public void run() {
 
-                                //リニアレイアウト水平----/水平A:Bで管理
-                                LinearLayout yokoLinear = new LinearLayout(getContext());
-                                yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
+                                //エラー対策,ヌルポ用
+                                try{
+                                    //リニアレイアウト水平----/水平A:Bで管理
+                                    LinearLayout yokoLinear = new LinearLayout(getActivity().getApplication());
+                                    yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
 
-                                //リニア水平A面(名前表示
-                                TextView name = new TextView(getContext()); //名前
-                                name.setText(mUser.getName() + " / ");
-                                yokoLinear.addView(name);
+                                    //リニア水平A面(名前表示
+                                    TextView name = new TextView(getContext()); //名前
+                                    name.setText(mUser.getName() + " / ");
+                                    yokoLinear.addView(name);
 
-                                //リニア水平B面の準備(ID)
-                                TextView screenName = new TextView(getContext()); //ID
-                                screenName.setText("@" + mUser.getScreenName());
-                                yokoLinear.addView(screenName);
-                                //動的ビューを全て取得した水平リニアを親元のリニアへ追加
-                                mLinearLayout.addView(yokoLinear);
-                                //mLinearLayout.removeView(yokoLinear);
-                                //mTempLinear = yokoLinear;
+                                    //リニア水平B面の準備(ID)
+                                    TextView screenName = new TextView(getContext()); //ID
+                                    screenName.setText("@" + mUser.getScreenName());
+                                    yokoLinear.addView(screenName);
+                                    //動的ビューを全て取得した水平リニアを親元のリニアへ追加
+                                    mLinearLayout.addView(yokoLinear);
+                                    //mLinearLayout.removeView(yokoLinear);
+                                    //mTempLinear = yokoLinear;
+                                }catch (NullPointerException e){
+
+                                }
+
+//                                //リニアレイアウト水平----/水平A:Bで管理
+//                                LinearLayout yokoLinear = new LinearLayout(getActivity().getApplication());
+//                                yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
+//
+//                                //リニア水平A面(名前表示
+//                                TextView name = new TextView(getContext()); //名前
+//                                name.setText(mUser.getName() + " / ");
+//                                yokoLinear.addView(name);
+//
+//                                //リニア水平B面の準備(ID)
+//                                TextView screenName = new TextView(getContext()); //ID
+//                                screenName.setText("@" + mUser.getScreenName());
+//                                yokoLinear.addView(screenName);
+//                                //動的ビューを全て取得した水平リニアを親元のリニアへ追加
+//                                mLinearLayout.addView(yokoLinear);
+//                                //mLinearLayout.removeView(yokoLinear);
+//                                //mTempLinear = yokoLinear;
 
 
                             }
@@ -230,6 +269,18 @@ public class RemoveCheckFragment extends Fragment {
 
         }
 
+    }
+
+    @Override
+    public void onPause() {
+        mRunFlg = false;
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        mRunFlg = false;
+        super.onDestroy();
     }
 
     //現在のフォロワと保存されたフォロワのリストを比較する
@@ -258,23 +309,47 @@ public class RemoveCheckFragment extends Fragment {
                                 mHandler.post(new Runnable() {
                                     public void run() {
 
-                                        //リニアレイアウト水平----/水平A:Bで管理
-                                        LinearLayout yokoLinear = new LinearLayout(getContext());
-                                        yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
+                                        //エラー処理, ヌルポ対策
+                                        try{
+                                            //リニアレイアウト水平----/水平A:Bで管理
+                                            LinearLayout yokoLinear = new LinearLayout(getContext());
+                                            yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
 
-                                        //リニア水平A面(名前表示
-                                        TextView name = new TextView(getContext()); //名前
-                                        name.setText(mUser.getName() + " / ");
-                                        yokoLinear.addView(name);
+                                            //リニア水平A面(名前表示
+                                            TextView name = new TextView(getContext()); //名前
+                                            name.setText(mUser.getName() + " / ");
+                                            yokoLinear.addView(name);
 
-                                        //リニア水平B面の準備(ID)
-                                        TextView screenName = new TextView(getContext()); //ID
-                                        screenName.setText("@" + mUser.getScreenName());
-                                        yokoLinear.addView(screenName);
-                                        //動的ビューを全て取得した水平リニアを親元のリニアへ追加
-                                        mTempLinear.addView(yokoLinear);
-                                        //mLinearLayout.removeView(yokoLinear);
-                                        //mTempLinear = yokoLinear;
+                                            //リニア水平B面の準備(ID)
+                                            TextView screenName = new TextView(getContext()); //ID
+                                            screenName.setText("@" + mUser.getScreenName());
+                                            yokoLinear.addView(screenName);
+                                            //動的ビューを全て取得した水平リニアを親元のリニアへ追加
+                                            mTempLinear.addView(yokoLinear);
+                                            //mLinearLayout.removeView(yokoLinear);
+                                            //mTempLinear = yokoLinear;
+                                        }catch (NullPointerException e){
+
+                                        }
+
+
+//                                        //リニアレイアウト水平----/水平A:Bで管理
+//                                        LinearLayout yokoLinear = new LinearLayout(getContext());
+//                                        yokoLinear.setOrientation(LinearLayout.HORIZONTAL);
+//
+//                                        //リニア水平A面(名前表示
+//                                        TextView name = new TextView(getContext()); //名前
+//                                        name.setText(mUser.getName() + " / ");
+//                                        yokoLinear.addView(name);
+//
+//                                        //リニア水平B面の準備(ID)
+//                                        TextView screenName = new TextView(getContext()); //ID
+//                                        screenName.setText("@" + mUser.getScreenName());
+//                                        yokoLinear.addView(screenName);
+//                                        //動的ビューを全て取得した水平リニアを親元のリニアへ追加
+//                                        mTempLinear.addView(yokoLinear);
+//                                        //mLinearLayout.removeView(yokoLinear);
+//                                        //mTempLinear = yokoLinear;
 
 
                                     }

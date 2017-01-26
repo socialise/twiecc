@@ -143,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences preferences = MainActivity.this.getSharedPreferences(PREF_NAME,
                                 Context.MODE_PRIVATE);
 
-                        final CharSequence[] items = {preferences.getString(ACCOUNT_NAME + 1, "test"),
-                                preferences.getString(ACCOUNT_NAME + 2, "test"),
-                                preferences.getString(ACCOUNT_NAME + 3, "test")};
+                        final CharSequence[] items = {preferences.getString(ACCOUNT_NAME + 1, "未設定"),
+                                preferences.getString(ACCOUNT_NAME + 2, "未設定"),
+                                preferences.getString(ACCOUNT_NAME + 3, "未設定")};
                         AlertDialog.Builder listDlg = new AlertDialog.Builder(MainActivity.this);
                         listDlg.setTitle("アカウント切替");
                         listDlg.setItems(
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.navigation_item_interval :
                         //[定期ツイート設定]を選択時の処理
-                        Intent intent = new Intent(MainActivity.this, MakeIntervalTweetActivity.class);
+                        Intent intent = new Intent(MainActivity.this, RootIntervalActivity.class);
                         startActivity(intent);
 //                        break;
 
@@ -237,22 +237,22 @@ public class MainActivity extends AppCompatActivity {
 
             Fragment fragment;
             switch (position) {
-                case 0:
+                case 0: //ホームのTL
                     Log.v(getClass().getName(), "フラグメント作成 Tab0");
                     fragment = new TimeLineFragment();
                     break;
-                case 1:
+                case 1: //プロフィール:複数ツイート削除用
                     Log.v(getClass().getName(), "フラグメント作成");
                     fragment = new MyInfoRootFragment();
                     break;
-                case 2:
+                case 2: //お気に入り一覧
                     fragment = new FavoriteTweetsFragment();
                     break;
-                case 3:
+                case 3: //相互一覧 おちる
                     fragment = new DispFriendsFragment();
 //                    fragment = new RemoveCheckFragment();
                     break;
-                case 4:
+                case 4: //リム確認 おちる
                     fragment = new RemoveCheckFragment();
                     break;
 
@@ -270,7 +270,27 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Tab " + position;
+
+            //すいっちでタイトルかえる
+            //りたーんでかえす
+
+            switch (position){
+                case 0:
+                    return "Home";
+                case 1:
+                    return "My";
+                case 2:
+                    return "Fav";
+                case 3:
+                    return "Fri";
+                case 4:
+                    return "Rem";
+                default:
+                    return "";
+            }
+
+
+//            return "Ta " + position;
         }
     }
 }

@@ -30,11 +30,16 @@ public class MakeIntervalTweetActivity extends AppCompatActivity {
     private Button mEndButton;
     private EditText mEditText;
     private SharedPreferences mPref;
+    private int mNum;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_interval);
+
+        //インテントから設定番号を取得
+        Intent intent = getIntent();
+        mNum = intent.getIntExtra("useNumber", 1);
 
         mStartButton = (Button)findViewById(R.id.setIntervalButton);
         mEndButton = (Button)findViewById(R.id.endIntervalButton);
@@ -44,11 +49,11 @@ public class MakeIntervalTweetActivity extends AppCompatActivity {
 
         //設定情報読み込み
         mPref = getSharedPreferences(SAVE_TIME, MODE_PRIVATE);
-        boolean testFlg = mPref.getBoolean(SAVE_FLG,false);
+        boolean testFlg = mPref.getBoolean(SAVE_FLG+mNum,false);
         Log.d("フラグ確認", "" + testFlg);
-        if(mPref.getBoolean(SAVE_FLG,false)){
+        if(mPref.getBoolean(SAVE_FLG+mNum,false)){
             //既に設定情報がある場合
-            mEditText.setText(mPref.getString(SAVE_STATUS_INTERVAL, ""), TextView.BufferType.NORMAL);
+            mEditText.setText(mPref.getString(SAVE_STATUS_INTERVAL+mNum, ""), TextView.BufferType.NORMAL);
         }else{
 
         }
@@ -72,20 +77,22 @@ public class MakeIntervalTweetActivity extends AppCompatActivity {
                         //プリファレンス保存
                         SharedPreferences.Editor editor = mPref.edit();
                         //時間・分(hour, minute)を保存
-                        editor.putInt(SAVE_TIME_HOUR, hour);
-                        editor.putInt(SAVE_TIME_MINUTE, minute);
+                        editor.putInt(SAVE_TIME_HOUR+mNum, hour);
+                        editor.putInt(SAVE_TIME_MINUTE+mNum, minute);
                         //ツイート内容を保存
-                        editor.putString(SAVE_STATUS_INTERVAL, mEditText.getText().toString());
-                        editor.putBoolean(SAVE_FLG, true);
+                        editor.putString(SAVE_STATUS_INTERVAL+mNum, mEditText.getText().toString());
+                        editor.putBoolean(SAVE_FLG+mNum, true);
                         editor.commit();
 
-                        //サービス停止
+                        //(重複を避ける為にサービス停止
                         stopService(new Intent(MakeIntervalTweetActivity.this, TestService.class));
+
+                        //サービス開始
                         startService(new Intent(MakeIntervalTweetActivity.this, TestService.class));
 
-                        Intent intent = new Intent(MakeIntervalTweetActivity.this, MakeIntervalTweetActivity.class);
+                        //
+                        Intent intent = new Intent(MakeIntervalTweetActivity.this, MainActivity.class);
                         startActivity(intent);
-
 
                     }
                 },
@@ -110,23 +117,24 @@ public class MakeIntervalTweetActivity extends AppCompatActivity {
 
                 //設定情報のクリア処理
                 SharedPreferences.Editor editor = mPref.edit();
-                editor.remove(SAVE_FLG);
-                editor.remove(SAVE_STATUS_INTERVAL);
-                editor.remove(SAVE_TIME);
-                editor.remove(SAVE_TIME_HOUR);
-                editor.remove(SAVE_TIME_MINUTE);
+                editor.remove(SAVE_FLG+mNum);
+                editor.remove(SAVE_STATUS_INTERVAL+mNum);
+                //editor.remove(SAVE_TIME);
+                editor.remove(SAVE_TIME_HOUR+mNum);
+                editor.remove(SAVE_TIME_MINUTE+mNum);
                 editor.commit();
                 //サービス停止
+//                stopService(new Intent(MakeIntervalTweetActivity.this, TestService.class));
+                //(重複を避ける為にサービス停止
                 stopService(new Intent(MakeIntervalTweetActivity.this, TestService.class));
-                Intent intent = new Intent(MakeIntervalTweetActivity.this, MakeIntervalTweetActivity.class);
-                startActivity(intent);
 
+                //サービス開始
+                startService(new Intent(MakeIntervalTweetActivity.this, TestService.class));
+                Intent intent = new Intent(MakeIntervalTweetActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
-
-
-
 
     }
 }
