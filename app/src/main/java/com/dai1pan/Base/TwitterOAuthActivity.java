@@ -100,11 +100,11 @@ public class TwitterOAuthActivity extends android.app.Activity {
             protected void onPostExecute(AccessToken accessToken) {
                 if (accessToken != null) {
                     // 認証成功！
-                    showToast("認証成功！");
+                    //Toast.makeText(this, "認証成功！", Toast.LENGTH_SHORT).show();
                     successOAuth(accessToken);
                 } else {
                     // 認証失敗。。。
-                    showToast("認証失敗。。。");
+                    //Toast.makeText(this, "認証失敗。。。", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -120,7 +120,4 @@ public class TwitterOAuthActivity extends android.app.Activity {
         finish();
     }
 
-    private void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
 }

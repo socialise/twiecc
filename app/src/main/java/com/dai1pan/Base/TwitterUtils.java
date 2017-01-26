@@ -82,7 +82,7 @@ public class TwitterUtils {
         if (hasAccessToken(context)) {
             twitter.setOAuthAccessToken(loadAccessToken(context));
         } else {
-            Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
         }
         context = null;
         return twitter;
@@ -114,7 +114,7 @@ public class TwitterUtils {
             twitter.setOAuthAccessToken(loadAccessToken(context, useNumber));
         } else {
             Log.v("getTwitterInstance", "hasAccessToken:false");
-            Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "アクセストークンの取得に失敗しました。", Toast.LENGTH_LONG).show();
         }
         return twitter;
     }

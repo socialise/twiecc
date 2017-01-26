@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, "aaaaaaaaaaaaaaaa", Toast.LENGTH_LONG);
+                    //Toast.makeText(MainActivity.this, "aaaaaaaaaaaaaaaa", Toast.LENGTH_LONG);
                 }
             });
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             DBCursor = db.rawQuery(sql, null);
 
         } catch (Exception e) {
-            Toast.makeText(this, "select:" + e.getMessage(), Toast.LENGTH_SHORT);
+            //Toast.makeText(this, "select:" + e.getMessage(), Toast.LENGTH_SHORT);
             Log.v("SQLModule select", e.toString());
         } finally {
 

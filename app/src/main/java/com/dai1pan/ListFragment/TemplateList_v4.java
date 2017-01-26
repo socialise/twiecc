@@ -92,7 +92,7 @@ public abstract class TemplateList_v4
      * ツイートを更新する
      */
     public void loadTweets() {
-        Toast.makeText(this.getContext(), "ろーどしました", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this.getContext(), "ろーどしました", Toast.LENGTH_LONG).show();
         AsyncTask<Void, Void, List<Status>> task = new async();
         task.execute();
     }
@@ -101,7 +101,7 @@ public abstract class TemplateList_v4
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         //TODO クリックした時の動作処理記述
-        Toast.makeText(getContext(), "おされた", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "おされた", Toast.LENGTH_SHORT).show();
         Status status = (Status) v.getTag();
         new AlertDialog.Builder(getActivity())
                 .setTitle(status.getUser().getName() + "さんのツイート")
@@ -371,7 +371,7 @@ public abstract class TemplateList_v4
                         @Override
                         public void run() {
                             if (getContext() != null)
-                                Toast.makeText(getContext(), "リミット超えました", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(), "リミット超えました", Toast.LENGTH_LONG).show();
                             Log.v("りみっとこえた", "limit exceeded");
                         }
                     });
