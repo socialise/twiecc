@@ -36,7 +36,7 @@ public class TwitterOAuthActivity extends android.app.Activity {
 	    mCallbackURL = getString(R.string.twitter_callback_url);
 	    mUseAccountNumber = i.getIntExtra("useAccountNumber", 1);
 	    if(mUseAccountNumber == 1) {
-		    mTwitter = TwitterUtils.getTwitterInstance(this);
+		    mTwitter = TwitterUtils.getTwitterInstance(mUseAccountNumber);
 	    } else {
 		    mTwitter = TwitterUtils.getTwitterInstance(mUseAccountNumber);
 	    }
@@ -114,7 +114,7 @@ public class TwitterOAuthActivity extends android.app.Activity {
     private void successOAuth(AccessToken accessToken) {
         //TwitterUtils.storeAccessToken(this, accessToken);
 	    //管理番号付加版の処理
-	    TwitterUtils.storeAccessToken2(this, accessToken, mUseAccountNumber);
+	    TwitterUtils.storeAccessToken(this, accessToken, mUseAccountNumber);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
